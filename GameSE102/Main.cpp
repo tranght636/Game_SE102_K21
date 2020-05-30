@@ -82,8 +82,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	HWND hWnd = CWindow::GetInstance()->CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
 	CWindow::GetInstance()->Init(hWnd);
+	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 	CWindow::GetInstance()->InitKeyboard(new CSampleKeyHandler());
 	CGame::GetInstance()->Init();
+
 	Run();
 	return 0;
 }

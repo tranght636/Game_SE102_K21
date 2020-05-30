@@ -2,14 +2,13 @@
 #include <windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "debug.h"
-#include "CWindow.h"
 
+#include "debug.h"
 #include "Game.h"
 #include "GameObject.h"
 #include "Textures.h"
-
 #include "CKeyEventHandler.h"
+#include "Camera.h"
 
 #define DIRECTINPUT_VERSION 0x0800
 #define KEYBOARD_BUFFER_SIZE 1024

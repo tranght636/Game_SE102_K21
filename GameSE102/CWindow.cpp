@@ -1,6 +1,7 @@
 #include "CWindow.h"
 #include "debug.h"
 
+
 CWindow * CWindow::__instance = NULL;
 
 /*
@@ -59,7 +60,7 @@ void CWindow::Init(HWND hWnd)
 */
 void CWindow::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom)
 {
-	D3DXVECTOR3 p(x, y, 0);
+	D3DXVECTOR3 p(floor(x-Camera::getInstance()->getX()), y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;

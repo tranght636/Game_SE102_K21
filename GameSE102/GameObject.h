@@ -25,6 +25,12 @@ public:
 	void SetState(int state) { this->state = state; }
 	int GetState() { return this->state; }
 
+	float getX() { return this->x; }
+	float getY() { return this->y; }
+
+	float getVx() { return this->vx; }
+	float getVy() { return this->vy; }
+
 	void Update(DWORD dt);
 	void Render();
 	CGameObject();

@@ -1,5 +1,10 @@
 #pragma once
 #include<d3dx9.h>
+
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
 class Camera
 {
 	float x;
@@ -11,7 +16,8 @@ class Camera
 	static Camera* instance;
 public:
 	static Camera* getInstance();
-	void convertWorldToView(float xWorld, float yWorld, float& xView, float& yView);
+	float getX();
+	float getY();
 	float getLeft();
 	float getTop();
 	float getRight();

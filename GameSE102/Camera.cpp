@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "CPlayer.h"
 
 Camera * Camera::instance = 0;
 Camera * Camera::getInstance() {
@@ -8,20 +9,12 @@ Camera * Camera::getInstance() {
 	return instance;
 }
 
-void Camera::convertWorldToView(float xWorld, float yWorld, float & xView, float & yView)
-{
-	/* ma trận biến đổi world to view */
-	D3DXMATRIX matrixWorldToView;
-	D3DXMatrixIdentity(&matrixWorldToView);
-	matrixWorldToView._22 = -1;
-	matrixWorldToView._41 = -this->getLeft();
-	matrixWorldToView._42 = this->getTop();
-	/* nhân ma trận đó với xWorld yWorld ta được xView yView */
-	D3DXVECTOR3 pos3(xWorld, yWorld, 1);
-	D3DXVECTOR4 MatrixResult;
-	D3DXVec3Transform(&MatrixResult, &pos3, &matrixWorldToView);
-	xView = MatrixResult.x;
-	yView = MatrixResult.y;
+float Camera::getX() {
+	return x;
+}
+
+float Camera::getY() {
+	return y;
 }
 
 float Camera::getLeft() {
@@ -50,7 +43,10 @@ void Camera::setDy(float dy) {
 }
 
 void Camera::update() {
-	x += dx;
+	float xPlayer = CPlayer::getInstane()->getX();
+	if (xPlayer > SCREEN_WIDTH / 4) {
+		this->x = xPlayer - SCREEN_WIDTH / 4;
+	}
 }
 
 Camera::Camera()
@@ -59,8 +55,6 @@ Camera::Camera()
 	this->y = 400;
 	this->width = 640;
 	this->height = 480;
-	this->dx = 3.5f;
-	this->dy = 0.0f;
 }
 
 

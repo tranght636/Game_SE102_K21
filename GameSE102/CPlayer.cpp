@@ -17,14 +17,14 @@ void CPlayer::Update(DWORD dt)
 	CGameObject::Update(dt);
 
 	// simple fall down
-	vy += MARIO_GRAVITY;
+	vy += MARIO_GRAVITY * dt;
 	if (y > 100)
 	{
 		vy = 0; y = 100.0f;
 	}
 
 	// simple screen edge collision!!!
-	if (vx > 0 && x > 290) x = 290;
+	//if (vx > 0 && x > 290) x = 290;
 	if (vx < 0 && x < 0) x = 0;
 }
 
@@ -69,5 +69,6 @@ void CPlayer::SetState(int state)
 		vx = 0;
 		break;
 	}
+	
 }
 

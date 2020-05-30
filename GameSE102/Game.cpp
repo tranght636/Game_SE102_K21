@@ -45,8 +45,8 @@ void CGame::Init() {
 }
 
 void CGame::Update(DWORD dt) {
-	CPlayer::getInstane()->Update(dt);
 	Camera::getInstance()->update();
+	CPlayer::getInstane()->Update(dt);
 }
 
 void CGame::Render() {

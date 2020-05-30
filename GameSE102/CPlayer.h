@@ -3,8 +3,8 @@
 #include "DirectionTexture.h"
 
 #define MARIO_WALKING_SPEED		0.1f
-#define MARIO_JUMP_SPEED_Y		1.0f
-#define MARIO_GRAVITY			0.08f
+#define MARIO_JUMP_SPEED_Y		0.6f
+#define MARIO_GRAVITY			0.002f
 
 #define MARIO_STATE_IDLE			0
 #define MARIO_STATE_WALKING_RIGHT	100

@@ -14,7 +14,7 @@ void DirectionTexture::SetDirection(int d, int x, int width) {
 	D3DXMatrixIdentity(&flipMatrix);
 	if (d == TEXTURE_DIRECTION_LEFT) {
 		flipMatrix._11 = -1;
-		flipMatrix._41 = 2 * (x + width / 2);
+		flipMatrix._41 = 2 * (x - Camera::getInstance()->getX() + width / 2);
 	}
 	CWindow::GetInstance()->GetSpriteHandler()->SetTransform(&flipMatrix);
 }
