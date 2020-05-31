@@ -20,7 +20,8 @@ class CPlayer : public CGameObject
 public:
 	static CPlayer * getInstane();
 	void Init();
-	void Update(DWORD dt);
-	void Render();
+	void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL) override;
+	void Render() override;
 	void SetState(int state);
+	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

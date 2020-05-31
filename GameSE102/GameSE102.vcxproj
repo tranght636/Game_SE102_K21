@@ -122,6 +122,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CSampleKeyHandler.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CKeyEventHandler.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="CSampleKeyHandler.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Debug.h" />

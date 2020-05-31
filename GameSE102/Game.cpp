@@ -4,6 +4,8 @@
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 
+vector<LPGAMEOBJECT> objects;
+
 CGame * CGame::__instance = NULL;
 
 CGame *CGame::GetInstance()
@@ -42,11 +44,20 @@ void CGame::Init() {
 	CPlayer::getInstane()->SetPosition(0.0f, 100.0f);
 
 	TileMap::getInstance()->init(L"textures\\tilemap\\tilesheet.png", L"textures\\tilemap\\matrix.dat");
+	
+	//init Brick
+	LPGAMEOBJECT object = NULL;
+	for (int i = 0; i < 47; i++) {
+		object = new CGameObject();
+		object->setSize(i * 16, 180, 16, 16);
+		objects.push_back(object);
+	}
+
 }
 
 void CGame::Update(DWORD dt) {
 	Camera::getInstance()->update();
-	CPlayer::getInstane()->Update(dt);
+	CPlayer::getInstane()->Update(dt, &objects);
 }
 
 void CGame::Render() {

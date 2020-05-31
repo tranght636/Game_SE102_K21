@@ -31,6 +31,9 @@
     <Filter Include="CameraAndMap">
       <UniqueIdentifier>{b6b2e5f9-fc2e-4545-8b71-ff176cd36aec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{a09e44f1-8c49-4814-98ed-7b561df38dc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -69,6 +72,9 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>CameraAndMap</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>CameraAndMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
