@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include <algorithm>
+#include "CWindow.h"
 
 unordered_map<int, LPANIMATION> CGameObject::animations;
 
@@ -118,8 +119,21 @@ void CGameObject::FilterCollision(
 void CGameObject::GetBoundingBox(float &left, float &top, float &right, float &bottom) {
 	left = x;
 	top = y;
-	right = left + width;
-	bottom = top - height;
+	right = x + width;
+	bottom = y + height;
+}
+
+void CGameObject::RenderBoundingBox(int alpha)
+{
+	LPDIRECT3DTEXTURE9 bbox = CTextures::GetInstance()->Get(ID_TEX_BBOX);
+	float l, t, r, b;
+	GetBoundingBox(l, t, r, b);
+	RECT rect;
+	rect.left = 0;
+	rect.top = 0;
+	rect.right = (int)r - (int)l;
+	rect.bottom = (int)b - (int)t;
+	CWindow::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, alpha);
 }
 
 

@@ -9,7 +9,30 @@ CPlayer* CPlayer::getInstane() {
 }
 
 void CPlayer::Init() {
+	LPDIRECT3DTEXTURE9 texPlayer = CTextures::GetInstance()->Get(ID_TEX_PLAYER);
+	CSprites * sprites = CSprites::GetInstance();
+	CAnimations * animations = CAnimations::GetInstance();
 
+	sprites->Add(ID_TEX_PLAYER + 1, 0, 1, 16, 31, texPlayer); // player idle right
+	sprites->Add(ID_TEX_PLAYER + 2, 16, 1, 28, 31, texPlayer);
+	sprites->Add(ID_TEX_PLAYER + 3, 28, 1, 43, 31, texPlayer);
+
+	LPANIMATION ani;
+
+	ani = new CAnimation(100);
+	ani->Add(ID_TEX_PLAYER + 1);
+	animations->Add(PLAYER_ANI_IDLE, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_TEX_PLAYER + 1);
+	ani->Add(ID_TEX_PLAYER + 2);
+	ani->Add(ID_TEX_PLAYER + 3);
+	animations->Add(PLAYER_ANI_WALKING, ani);
+
+	CPlayer::AddAnimation(PLAYER_ANI_IDLE);		// idle right
+	CPlayer::AddAnimation(PLAYER_ANI_WALKING);		// walk right
+
+	CPlayer::getInstane()->SetPosition(0.0f, 100.0f);
 }
 
 void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -17,14 +40,14 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 	// Simple fall down
-	vy += MARIO_GRAVITY * dt;
+	vy += PLAYER_GRAVITY * dt;
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	coEvents.clear();
 	CalcPotentialCollisions(coObjects, coEvents);
 
 	//// reset untouchable timer if untouchable time has passed
-	//if (GetTickCount() - untouchable_start > MARIO_UNTOUCHABLE_TIME)
+	//if (GetTickCount() - untouchable_start > PLAYER_UNTOUCHABLE_TIME)
 	//{
 	//	untouchable_start = 0;
 	//	untouchable = 0;
@@ -55,6 +78,18 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (ny != 0) vy = 0;
 
 		// Collision logic with orther object
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i];
+
+			if (dynamic_cast<Brick*>(e->obj)) // if e->obj is Goomba 
+			{
+				if (e->ny < 0)	//ny < 0 player's bottom collie brick's top
+				{
+					this->setOnGround(true);
+				}
+			}
+		}
 	}
 
 	// clean up collision events
@@ -66,19 +101,20 @@ void CPlayer::Render()
 	int ani;
 	if (vx == 0)
 	{
-		ani = MARIO_ANI_IDLE;
+		ani = PLAYER_ANI_IDLE;
 		if (nx > 0) direction = TEXTURE_DIRECTION_RIGHT;
 		else direction = TEXTURE_DIRECTION_LEFT;
 	}
 	else if (vx > 0) {
-		ani = MARIO_ANI_WALKING;
+		ani = PLAYER_ANI_WALKING;
 		direction = TEXTURE_DIRECTION_RIGHT;
 	}
 	else {
-		ani = MARIO_ANI_WALKING;
+		ani = PLAYER_ANI_WALKING;
 		direction = TEXTURE_DIRECTION_LEFT;
 	}
 	animations[ani]->Render(x, y, direction);
+	//RenderBoundingBox(150);
 }
 
 void CPlayer::SetState(int state)
@@ -86,22 +122,24 @@ void CPlayer::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case MARIO_STATE_WALKING_RIGHT:
-		vx = MARIO_WALKING_SPEED;
+	case PLAYER_STATE_WALKING_RIGHT:
+		vx = PLAYER_WALKING_SPEED;
 		nx = 1;
 		break;
-	case MARIO_STATE_WALKING_LEFT:
-		vx = -MARIO_WALKING_SPEED;
+	case PLAYER_STATE_WALKING_LEFT:
+		vx = -PLAYER_WALKING_SPEED;
 		nx = -1;
 		break;
-	case MARIO_STATE_JUMP:
-		vy = -MARIO_JUMP_SPEED_Y;
-
-	case MARIO_STATE_IDLE:
+	case PLAYER_STATE_JUMP: {
+		if (getOnGround()) {
+			vy = -PLAYER_JUMP_SPEED_Y;
+			setOnGround(false);
+		}
+	}
+	case PLAYER_STATE_IDLE:
 		vx = 0;
 		break;
 	}
-	
 }
 
 void CPlayer::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -109,5 +147,13 @@ void CPlayer::GetBoundingBox(float &left, float &top, float &right, float &botto
 	left = x;
 	top = y;
 	right = x + 16;	// getAnimation(animationIndex)->getFrame(frameIndex)->getWidth();
-	bottom = y + 16; // ||||||||
+	bottom = y + 30; // ||||||||
+}
+
+CPlayer::CPlayer() {
+	isOnGround = false;
+}
+
+CPlayer::~CPlayer() {
+
 }

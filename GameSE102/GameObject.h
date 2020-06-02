@@ -75,6 +75,7 @@ public:
 		float &nx,
 		float &ny);
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
+	void RenderBoundingBox(int alpha);
 
 	CGameObject();
 	~CGameObject();

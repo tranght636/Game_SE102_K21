@@ -1,9 +1,6 @@
 #pragma once
 #include<d3dx9.h>
-
-
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#include "GameConfig.h"
 
 class Camera
 {

@@ -8,7 +8,7 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		CPlayer::getInstane()->SetState(MARIO_STATE_JUMP);
+		CPlayer::getInstane()->SetState(PLAYER_STATE_JUMP);
 		break;
 	}
 }
@@ -21,8 +21,8 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 void CSampleKeyHandler::KeyState(BYTE *states)
 {
 	if (CWindow::GetInstance()->IsKeyDown(DIK_RIGHT))
-		CPlayer::getInstane()->SetState(MARIO_STATE_WALKING_RIGHT);
+		CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_RIGHT);
 	else if (CWindow::GetInstance()->IsKeyDown(DIK_LEFT))
-		CPlayer::getInstane()->SetState(MARIO_STATE_WALKING_LEFT);
-	else CPlayer::getInstane()->SetState(MARIO_STATE_IDLE);
+		CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_LEFT);
+	else CPlayer::getInstane()->SetState(PLAYER_STATE_IDLE);
 }

@@ -44,15 +44,15 @@ void Camera::setDy(float dy) {
 
 void Camera::update() {
 	float xPlayer = CPlayer::getInstane()->getX();
-	if (xPlayer > SCREEN_WIDTH / 4) {
-		this->x = xPlayer - SCREEN_WIDTH / 4;
+	if (xPlayer > SCREEN_DX) {
+		this->x = xPlayer - SCREEN_DX;
 	}
 }
 
 Camera::Camera()
 {
 	this->x = 0;
-	this->y = 400;
+	this->y = 480;
 	this->width = 640;
 	this->height = 480;
 }

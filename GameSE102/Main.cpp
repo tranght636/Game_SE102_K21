@@ -6,15 +6,10 @@
 #include "CWindow.h"
 #include "Game.h"
 #include "CSampleKeyHandler.h"
+#include "GameConfig.h"
 
-#define WINDOW_CLASS_NAME L"GameSE104"
-#define MAIN_WINDOW_TITLE L"GameSE104"
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(200, 200, 255)
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-
-#define MAX_FRAME_RATE 90
 
 /*
 	Render a frame

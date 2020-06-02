@@ -75,11 +75,14 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CSampleKeyHandler.h">
       <Filter>Handler</Filter>
     </ClInclude>
@@ -115,6 +118,18 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfig.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

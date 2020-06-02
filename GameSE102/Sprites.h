@@ -4,6 +4,8 @@
 #include <unordered_map>
 using namespace std;
 
+#define ANI_DEFAUT_TIME 100
+
 class CSprite
 {
 	int id;				// Sprite ID in the sprite database
@@ -61,7 +63,7 @@ class CAnimation
 	int currentFrame;
 	vector<LPANIMATION_FRAME> frames;
 public:
-	CAnimation(int defaultTime);
+	CAnimation(int defaultTime = ANI_DEFAUT_TIME);
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y, int direction);
 };

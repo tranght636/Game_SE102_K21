@@ -18,9 +18,9 @@ class TileMap
 	static TileMap* instance;
 public:
 	static TileMap* getInstance();
-	void render(Camera* camera);
 	int getMapHeight();
-	void init(LPCWSTR tilesheetPath, LPCWSTR matrixPath);
+	void init();
+	void render(Camera* camera);
 	TileMap();
 	~TileMap();
 };
