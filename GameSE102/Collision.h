@@ -1,7 +1,8 @@
 #pragma once
-#include <Windows.h>
 #include "GameObject.h"
 
+class CGameObject;
+typedef CGameObject * LPGAMEOBJECT;
 
 class Collision
 {
@@ -20,6 +21,7 @@ public:
 		float &t,
 		float &nx,
 		float &ny);
+	static bool checkAABB(LPGAMEOBJECT object1, LPGAMEOBJECT object2);
 	Collision();
 	~Collision();
 };

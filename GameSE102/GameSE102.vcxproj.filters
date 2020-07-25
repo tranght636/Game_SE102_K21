@@ -34,6 +34,9 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{a09e44f1-8c49-4814-98ed-7b561df38dc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SenceManager">
+      <UniqueIdentifier>{13e89c1d-be3f-4849-8dfd-177c29b20b71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -79,6 +82,21 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Objects.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScence.cpp">
+      <Filter>SenceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Scence.cpp">
+      <Filter>SenceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Stair.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,6 +147,21 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Objects.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScence.h">
+      <Filter>SenceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Scence.h">
+      <Filter>SenceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Stair.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

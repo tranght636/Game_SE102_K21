@@ -56,12 +56,17 @@ int TileMap::getMapHeight()
 	return mapHeight;
 }
 
-void TileMap::init()
+int TileMap::getMapWidth() {
+	return mapWidth;
+}
+
+void TileMap::init(LPCWSTR pathImage, LPCWSTR pathInfo)
 {
-	texture = CWindow::GetInstance()->LoadTexture(L"textures\\tilemap\\tilesheet.png");
-	fstream fs(L"textures\\tilemap\\matrix.dat");
+	texture = CWindow::GetInstance()->LoadTexture(pathImage);
+	fstream fs(pathInfo);
 	fs >> tileRows >> tileColumns >> tileWidth >> tileHeight >> tilesheetColumns;
 	this->mapHeight = tileRows * tileHeight;
+	this->mapWidth = tileColumns * tileWidth;
 	matrix = new int*[tileRows];
 	for (size_t rowIndex = 0; rowIndex < tileRows; rowIndex++)
 	{
@@ -71,6 +76,13 @@ void TileMap::init()
 			fs >> matrix[rowIndex][columnIndex];
 		}
 	}
+}
+
+void TileMap::clear() {
+	for (int i = 0; i < tileRows; i++) {
+		delete matrix[i];
+	}
+	delete matrix;
 }
 
 TileMap::TileMap()

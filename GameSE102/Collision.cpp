@@ -98,6 +98,16 @@ void Collision::SweptAABB(
 
 }
 
+bool Collision::checkAABB(LPGAMEOBJECT object1, LPGAMEOBJECT object2)
+{
+	float l1, t1, r1, b1;
+	float l2, t2, r2, b2;
+	object1->GetBoundingBox(l1, t1, r1, b1);
+	object2->GetBoundingBox(l2, t2, r2, b2);
+	return((l1 < r2 && r1 > l2) &&
+		(b1 > t2 && t1 < b2));
+}
+
 Collision::Collision()
 {
 }

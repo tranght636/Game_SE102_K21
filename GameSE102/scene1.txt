@@ -1,0 +1,22 @@
+[TILEMAP]
+# path_tilesheet path_info
+textures\scene\scene1\tilesheet.png	textures\scene\scene1\matrix.dat
+
+[CAMERA]
+# 0: camera start to left, 1: camera start to right
+0
+
+[OBJECTS]
+# type	x	y	ani_set_id	extra_settings per object type
+# type: 0 = Player , -2 = Brick, Portal = -1
+# Player
+0	20.0	0	1
+
+# --- SCENE PORTAL ----
+# type	l	t	ani_set_id	r	b	scene_id
+-1	752	100	0	768	150	2
+#-1	52	100	0	68	150	2
+
+# BRICK 
+# --- platform (hint: I created the list using Excel!) ---
+-2	1	159	769	16

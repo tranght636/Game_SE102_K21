@@ -1,14 +1,16 @@
 #include "GameObject.h"
 #include <algorithm>
 #include "CWindow.h"
+#include "Stair.h"
 
-unordered_map<int, LPANIMATION> CGameObject::animations;
+//unordered_map<int, LPANIMATION> CGameObject::animations;
 
 CGameObject::CGameObject()
 {
 	x = y = 0;
 	vx = vy = 0;
 	nx = 1;
+	ani = -1;
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -18,11 +20,11 @@ void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	dy = vy * dt;
 }
 
-void CGameObject::AddAnimation(int aniId)
-{
-	LPANIMATION ani = CAnimations::GetInstance()->Get(aniId);
-	animations[aniId] = ani;
-}
+//void CGameObject::AddAnimation(int aniId)
+//{
+//	LPANIMATION ani = CAnimations::GetInstance()->Get(aniId);
+//	animations[aniId] = ani;
+//}
 
 
 /*
@@ -72,6 +74,7 @@ void CGameObject::CalcPotentialCollisions(
 {
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
+		if (dynamic_cast<Stair*>(coObjects->at(i))) continue;
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
 		if (e->t > 0 && e->t <= 1.0f)

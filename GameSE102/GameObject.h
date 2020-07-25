@@ -38,11 +38,16 @@ protected:
 	float vy;
 	int nx;
 	int state;
+	int stateCommon;
 	int direction;
 	DWORD dt;
-	static unordered_map<int, LPANIMATION> animations;
+	//static unordered_map<int, LPANIMATION> animations;
+
+	int ani;
+
+	LPANIMATION_SET animation_set;
 public:
-	static void AddAnimation(int aniId);
+	//static void AddAnimation(int aniId);
 
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -54,13 +59,54 @@ public:
 	}
 
 	void SetState(int state) { this->state = state; }
-	int GetState() { return this->state; }
+	int SetState() { return this->state; }
+
+	void setStateCommon(int stateCommon) { this->stateCommon = stateCommon; }
+	int getStateCommon() { return this->stateCommon; }
 
 	float getX() { return this->x; }
 	float getY() { return this->y; }
 
+	float getWidth() {
+		if (ani != -1) {
+			LPANIMATION animations = animation_set->at(ani);
+			return animations->getCurrentFrame()->GetSprite()->getWidth();
+		}
+		else {
+			return this->width;
+		}
+	}
+	float getHeight() { 
+		if (ani != -1) {
+			LPANIMATION animations = animation_set->at(ani);
+			float height = animations->getCurrentFrame()->GetSprite()->getHeight();
+			return height;
+		}
+		return this->height; 
+	}
+
+	// get độ chệnh lệnh rộng 2 frame
+	float getDW() {
+		if (ani != -1) {
+			LPANIMATION animations = animation_set->at(ani);
+			float currenWidth = animations->getCurrentFrame()->GetSprite()->getWidth();
+			float nextWidth = 0;
+			if (animations->getNextFrame() != 0) {
+				nextWidth = animations->getNextFrame()->GetSprite()->getWidth();
+			}
+			
+			return nextWidth - currenWidth;
+		}
+	}
+
+	float getBottom() { return y + height; }
+	float getRight() { return x + width; }
+	float getMidX() { return x + width / 2; }
+	float getMidY() { return y - height / 2; }
 	float getVx() { return this->vx; }
 	float getVy() { return this->vy; }
+	float getDirection() { return direction; }
+	void setDirection(int dir) { this->direction = dir; }
 
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() {};
@@ -79,4 +125,8 @@ public:
 
 	CGameObject();
 	~CGameObject();
+
+	void SetAnimationSet(LPANIMATION_SET ani_set) { animation_set = ani_set; }
+
+	
 };

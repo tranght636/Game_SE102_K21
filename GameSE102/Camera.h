@@ -24,6 +24,8 @@ public:
 
 	void setDx(float dx);
 	void setDy(float dy);
+	void reset();
+	void setX(float x) { this->x = x; }
 
 	void update();
 	Camera();

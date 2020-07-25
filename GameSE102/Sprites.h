@@ -19,6 +19,7 @@ class CSprite
 public:
 	CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
 	int getWidth();
+	int getHeight();
 	void Draw(float x, float y);
 };
 
@@ -36,7 +37,7 @@ class CSprites
 public:
 	void Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
 	LPSPRITE Get(int id);
-
+	void Clear();
 	static CSprites * GetInstance();
 };
 
@@ -61,14 +62,17 @@ class CAnimation
 	DWORD lastFrameTime;
 	int defaultTime;
 	int currentFrame;
+	int nextFrame;
 	vector<LPANIMATION_FRAME> frames;
 public:
 	CAnimation(int defaultTime = ANI_DEFAUT_TIME);
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y, int direction);
+	LPANIMATION_FRAME getCurrentFrame();
+	LPANIMATION_FRAME getNextFrame();
 };
 
-typedef CAnimation *LPANIMATION;
+typedef CAnimation* LPANIMATION;
 
 class CAnimations
 {
@@ -79,7 +83,30 @@ class CAnimations
 public:
 	void Add(int id, LPANIMATION ani);
 	LPANIMATION Get(int id);
-
+	void Clear();
 	static CAnimations * GetInstance();
+};
+
+
+typedef vector<LPANIMATION> CAnimationSet;
+
+typedef CAnimationSet* LPANIMATION_SET;
+
+/*
+	Manage animation set database
+*/
+class CAnimationSets
+{
+	static CAnimationSets * __instance;
+
+	unordered_map<int, LPANIMATION_SET> animation_sets;
+
+public:
+	CAnimationSets();
+	void Add(int id, LPANIMATION_SET ani);
+	LPANIMATION_SET Get(unsigned int id);
+
+
+	static CAnimationSets * GetInstance();
 };
 

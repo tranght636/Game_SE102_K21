@@ -44,17 +44,21 @@ void Camera::setDy(float dy) {
 
 void Camera::update() {
 	float xPlayer = CPlayer::getInstane()->getX();
-	if (xPlayer > SCREEN_DX) {
+	if (xPlayer > SCREEN_DX && xPlayer < TileMap::getInstance()->getMapWidth() - SCREEN_DX - 16) {
 		this->x = xPlayer - SCREEN_DX;
 	}
+}
+
+void Camera::reset() {
+	this->x = 0;
 }
 
 Camera::Camera()
 {
 	this->x = 0;
-	this->y = 480;
-	this->width = 640;
-	this->height = 480;
+	this->y = SCREEN_HEIGHT;
+	this->width = SCREEN_WIDTH;
+	this->height = SCREEN_HEIGHT;
 }
 
 

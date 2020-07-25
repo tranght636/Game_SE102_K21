@@ -24,3 +24,17 @@ CTextures::CTextures() {
 	Add(ID_TEX_BBOX, L"textures\\bbox.png");
 }
 CTextures::~CTextures() {}
+
+/*
+	Clear all loaded textures
+*/
+void CTextures::Clear()
+{
+	for (auto x : textures)
+	{
+		LPDIRECT3DTEXTURE9 tex = x.second;
+		if (tex != NULL) tex->Release();
+	}
+
+	textures.clear();
+}

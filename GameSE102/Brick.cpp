@@ -24,12 +24,19 @@ void Brick::init() {
 	}
 }
 
-//void Brick::render() {
-//	vector<LPGAMEOBJECT> bricks = Objects::GetInstance()->getAllObjects();
-//	for (UINT i = 0; i < bricks.size(); i++) {
-//		bricks[i]->RenderBoundingBox(150);
-//	}
-//}
+void Brick::render() {
+	vector<LPGAMEOBJECT> bricks = Objects::GetInstance()->getAllObjects();
+	for (UINT i = 0; i < bricks.size(); i++) {
+		bricks[i]->RenderBoundingBox(150);
+	}
+}
+
+Brick::Brick(float x, float y, float width, float height) {
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->height = height;
+}
 
 Brick::Brick()
 {

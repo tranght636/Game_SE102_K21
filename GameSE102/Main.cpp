@@ -8,8 +8,8 @@
 #include "CSampleKeyHandler.h"
 #include "GameConfig.h"
 
-
-#define BACKGROUND_COLOR D3DCOLOR_XRGB(200, 200, 255)
+#define SENCE_CONFIG_PATH L"scene-config.txt"
+#define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
 
 /*
 	Render a frame
@@ -27,7 +27,7 @@ void Render()
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
-		CGame::GetInstance()->Render();
+		CGame::GetInstance()->GetCurrentScene()->Render();
 
 		spriteHandler->End();
 		d3ddv->EndScene();
@@ -64,7 +64,7 @@ int Run()
 		{
 			frameStart = now;
 			CWindow::GetInstance()->ProcessKeyboard();
-			CGame::GetInstance()->Update(dt);
+			CGame::GetInstance()->GetCurrentScene()->Update(dt);
 			Render();
 		}
 		else
@@ -79,7 +79,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CWindow::GetInstance()->Init(hWnd);
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 	CWindow::GetInstance()->InitKeyboard(new CSampleKeyHandler());
-	CGame::GetInstance()->Init();
+	//CGame::GetInstance()->Init();
+	CGame::GetInstance()->Load(SENCE_CONFIG_PATH);
 
 	Run();
 	return 0;

@@ -133,9 +133,14 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="Objects.cpp" />
+    <ClCompile Include="PlayScence.cpp" />
+    <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Scence.cpp" />
     <ClCompile Include="Sprites.cpp" />
+    <ClCompile Include="Stair.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h" />
@@ -151,9 +156,14 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="Objects.h" />
+    <ClInclude Include="PlayScence.h" />
+    <ClInclude Include="Portal.h" />
+    <ClInclude Include="Scence.h" />
     <ClInclude Include="Sprites.h" />
+    <ClInclude Include="Stair.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

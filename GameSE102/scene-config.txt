@@ -1,0 +1,49 @@
+[SETTINGS]
+start	6
+#scene list
+[SCENES]
+1	scene1.txt
+2	scene2.txt
+3	scene2_2.txt
+4	scene3_1.txt
+5	scene3_2.txt
+6	scene4.txt
+
+# id	file_path	transparent_color_r	g	b
+[TEXTURES]
+0	textures\player\image.png	255	255	255
+
+# id	left	top	right	bottom	texture_id
+[SPRITES]
+# Player
+# idle
+10001	0	1	16	31	0
+# walk
+10002	16	1	28	31	0		
+10003	28	1	43	31	0
+# on stair
+10004	75	2	90	33	0
+# down stair
+10005	59	2	16	29	0
+						
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+# Player
+100	10001	100
+# walk
+101	10001	100	10002	100	10003	100
+
+# go on stair
+102	10004	100	10002	100
+# go down stair
+103	10005	100	10002	100
+# stand up stair
+104	10004	100
+# stand down stair
+105	10005	100
+
+# id	ani1	ani2	ani3
+#
+[ANIMATION_SETS]
+# Player
+1	100	101	102	103	104	105

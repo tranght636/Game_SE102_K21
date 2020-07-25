@@ -12,6 +12,7 @@ class TileMap
 	int tileColumns;
 	int tilesheetColumns;
 	int mapHeight;
+	int mapWidth;
 	
 	int** matrix;
 	LPDIRECT3DTEXTURE9 texture;
@@ -19,8 +20,10 @@ class TileMap
 public:
 	static TileMap* getInstance();
 	int getMapHeight();
-	void init();
+	int getMapWidth();
+	void init(LPCWSTR pathImage, LPCWSTR pathInfo);
 	void render(Camera* camera);
+	void clear();
 	TileMap();
 	~TileMap();
 };
