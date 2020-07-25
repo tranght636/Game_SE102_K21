@@ -22,9 +22,9 @@ start	6
 10002	16	1	28	31	0		
 10003	28	1	43	31	0
 # on stair
-10004	75	2	90	33	0
+10004	75	2	90	32	0
 # down stair
-10005	59	2	16	29	0
+10005	60	2	75	32	0
 						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]

@@ -108,6 +108,9 @@ public:
 	float getDirection() { return direction; }
 	void setDirection(int dir) { this->direction = dir; }
 
+	void setAni(int ani) { this->ani = ani; }
+	int getAni() { return this->ani; }
+
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() {};
 

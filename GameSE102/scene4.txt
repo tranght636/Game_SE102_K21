@@ -19,6 +19,8 @@ textures\scene\scene4\tilesheet.png	textures\scene\scene4\matrix.dat
 # STAIR
 #type	l	t	w	h	isTop isRightStair
 -3	352	160	16	16	0	0
+-3	96	64	16	16	1	0
+-3	688	128	16	16	0	1
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ---

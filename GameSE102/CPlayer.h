@@ -30,6 +30,8 @@
 #define PLAYER_PREPARE_STAIR_DOWN 2
 
 #define DXY_STAIR	8.0f
+#define PLAYER_ON_STAIR_LEFT -1
+#define PLAYER_ON_STAIR_RIGHT 1
 
 class CPlayer : public CGameObject
 {
@@ -40,6 +42,7 @@ class CPlayer : public CGameObject
 	bool isStateStair;
 	bool isOnGround;
 	int stateOnStair;
+	int stairDirection;
 	float destX;
 	float destY;
 public:
@@ -59,6 +62,8 @@ public:
 	void setDestY(float destY) { this->destY = destY; }
 	int getStateOnStair() { return this->stateOnStair; }
 	void setStateOnStair(int stateOnStair) { this->stateOnStair = stateOnStair; }
+	int getStairDirection() { return stairDirection; }
+	void setStairDirection(int dir) { this->stairDirection = dir; }
 	CPlayer();
 	~CPlayer();
 };

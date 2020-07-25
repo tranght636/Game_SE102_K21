@@ -21,17 +21,50 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			case PLAYER_STATE_STAND_STAIR:
 				
 				if (CSampleKeyHandler::isUpDown) {
-					destX = getX() - DXY_STAIR;
-					destY = getY() - DXY_STAIR;
-					vx = -PLAYER_ON_STAIR_SPEED;
-					vy = -PLAYER_ON_STAIR_SPEED;
 					ani = PLAYER_ANI_STAIR_UP;
 					stateOnStair = PLAYER_STATE_WALKING_STAIR_UP;
+					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
+						destX = getX() + DXY_STAIR;
+						vx = PLAYER_ON_STAIR_SPEED;
+						direction = 1;
+					}
+					else {
+						destX = getX() - DXY_STAIR;
+						vx = -PLAYER_ON_STAIR_SPEED;
+						direction = -1;
+					}
+					destY = getY() - DXY_STAIR;
+					vy = -PLAYER_ON_STAIR_SPEED;
+					//direction = stairDirection == PLAYER_ON_STAIR_RIGHT ? 1 : -1;
+				}
+				if (CSampleKeyHandler::isDownDown) {
+					
+					
+					/*vx = +PLAYER_ON_STAIR_SPEED;
+					vy = +PLAYER_ON_STAIR_SPEED;*/
+					ani = PLAYER_ANI_STAIR_DOWN;
+					stateOnStair = PLAYER_STATE_WALKING_STAIR_DOWN;
+
+					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
+						destX = getX() - DXY_STAIR;
+						vx = -PLAYER_ON_STAIR_SPEED;
+						direction = -1;
+					}
+					else {
+						destX = getX() + DXY_STAIR;
+						vx = +PLAYER_ON_STAIR_SPEED;
+						direction = +1;
+					}
+					destY = getY() + DXY_STAIR;
+					vy = +PLAYER_ON_STAIR_SPEED;
+
+					//direction = stairDirection == PLAYER_ON_STAIR_RIGHT ? -1 : 1;
 				}
 				break;
 
 			case PLAYER_STATE_WALKING_STAIR_UP:
-				if (getX() < destX) {
+				if ((getX() < destX && stairDirection == PLAYER_ON_STAIR_LEFT)
+					|| (getX() > destX && stairDirection == PLAYER_ON_STAIR_RIGHT)) {
 					vx = 0;
 					vy = 0;
 					/*x = destX;
@@ -45,7 +78,25 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					y += dy;
 				}
 				break;
+			case PLAYER_STATE_WALKING_STAIR_DOWN:
+				if ((getX() > destX && stairDirection == PLAYER_ON_STAIR_LEFT)
+					|| (getX() < destX && stairDirection == PLAYER_ON_STAIR_RIGHT)) {
+					vx = 0;
+					vy = 0;
+					/*x = destX;
+					y = destY;*/
+					ani = PLAYER_ANI_STAND_STAIR_DOWN;
+					stateOnStair = PLAYER_STATE_STAND_STAIR;
+				}
+				else {
+					CGameObject::Update(dt);
+					x += dx;
+					y += dy;
+				}
+				break;
 			}
+			
+
 			
 			
 			break;
