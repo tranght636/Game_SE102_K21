@@ -99,12 +99,16 @@ public:
 		}
 	}
 
-	float getBottom() { return y + height; }
-	float getRight() { return x + width; }
-	float getMidX() { return x + width / 2; }
-	float getMidY() { return y - height / 2; }
+	float getBottom() { return y + getHeight(); }
+	float getRight() { return x + getWidth(); }
+	float getMidX() { return x + getWidth() / 2; }
+	float getMidY() { return y - getHeight() / 2; }
 	float getVx() { return this->vx; }
 	float getVy() { return this->vy; }
+	void setDx(float dx) { this->dx = dx; }
+	float getDx() { return this->dx; }
+	void setDy(float dy) { this->dy = dy; }
+	float getDy() { return this->dy; }
 	float getDirection() { return direction; }
 	void setDirection(int dir) { this->direction = dir; }
 
