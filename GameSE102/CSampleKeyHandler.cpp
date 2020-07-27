@@ -17,7 +17,9 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		CPlayer::getInstane()->SetState(PLAYER_STATE_JUMP);
+		if (CPlayer::getInstane()->getStateCommon() != PLAYER_STATE_ON_STAIR) {
+			CPlayer::getInstane()->SetState(PLAYER_STATE_JUMP);
+		}
 		break;
 	//case DIK_UP:
 	//	CPlayer::getInstane()->setPrepareGoStair(1);

@@ -26,17 +26,15 @@ void Stair::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 				if (this->isRightStair) {
 					xPlayerOnStair = this->getMidX() - this->getWidth();
 					yPlayerOnStair = this->getBottom() - player->getHeight();
-					player->SetPosition(xPlayerOnStair, yPlayerOnStair);	
 				}
 				else {
 					xPlayerOnStair = this->getMidX()+2;
 					yPlayerOnStair = this->getBottom() - player->getHeight();
-					player->SetPosition(xPlayerOnStair, yPlayerOnStair);
 				}
-				player->setAni(PLAYER_ANI_STAND_STAIR_UP);
+				player->SetPosition(xPlayerOnStair, yPlayerOnStair);
 				player->setStairDirection(this->isRightStair ? 1 : -1);
-				
-
+				player->setDirection(this->isRightStair ? 1 : -1);
+				player->setAni(PLAYER_ANI_STAND_STAIR_UP);
 			//player->SetState(PLAYER_STATE_ON_STAIR);
 		}
 		else if (CSampleKeyHandler::isDownDown
@@ -55,20 +53,19 @@ void Stair::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 					yPlayerOnStair = this->getBottom() + this->getHeight() / 2 - player->getHeight();
 				}
 				player->SetPosition(xPlayerOnStair, yPlayerOnStair);
-				player->setAni(PLAYER_ANI_STAND_STAIR_DOWN);
 				player->setStairDirection(this->isRightStair ? 1 : -1);
-				player->setDestX(xPlayerOnStair);
-				player->setDestY(yPlayerOnStair);
+				player->setDirection(this->isRightStair ? -1 : 1);
+				player->setAni(PLAYER_ANI_STAND_STAIR_DOWN);
 		}
 		else if (player->getStateCommon() == PLAYER_STATE_ON_STAIR) {
 			float vy = player->getVy();
 			if ((vy < 0 && this->isTop && this->isRightStair && player->getRight() > this->getX() + 2)
 				|| (vy < 0 && this->isTop && !this->isRightStair && player->getX() < this->getRight() - 2)) {
-				player->setDirection(this->isRightStair ? 1 : -1);
+				//player->setDirection(this->isRightStair ? 1 : -1);
 				player->setIsEndStair(true);
 			}
-			if(vy > 0 && !this->isTop && this->getBottom() - 2 < player->getBottom()) {
-				player->setDirection(this->isRightStair ? -1 : 1);
+			if(vy > 0 && !this->isTop && this->getBottom() - 4 < player->getBottom()) {
+				//player->setDirection(this->isRightStair ? -1 : 1);
 				player->setIsEndStair(true);
 			}
 		}

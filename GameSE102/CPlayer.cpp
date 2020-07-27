@@ -38,7 +38,7 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					ani = PLAYER_ANI_STAIR_UP;
 					stateOnStair = PLAYER_STATE_WALKING_STAIR_UP;
 				}
-				if (CSampleKeyHandler::isDownDown) {
+				else if (CSampleKeyHandler::isDownDown) {
 					
 					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
 						destX = getX() - DXY_STAIR;
@@ -208,16 +208,16 @@ void CPlayer::Render()
 		if (vx == 0)
 		{
 			ani = PLAYER_ANI_IDLE;
-			if (nx > 0) direction = TEXTURE_DIRECTION_RIGHT;
-			else direction = TEXTURE_DIRECTION_LEFT;
+			/*if (nx > 0) direction = TEXTURE_DIRECTION_RIGHT;
+			else direction = TEXTURE_DIRECTION_LEFT;*/
 		}
 		else if (vx > 0) {
 			ani = PLAYER_ANI_WALKING;
-			direction = TEXTURE_DIRECTION_RIGHT;
+			//direction = TEXTURE_DIRECTION_RIGHT;
 		}
 		else {
 			ani = PLAYER_ANI_WALKING;
-			direction = TEXTURE_DIRECTION_LEFT;
+			//direction = TEXTURE_DIRECTION_LEFT;
 		}
 		break;
 	}
@@ -251,11 +251,11 @@ void CPlayer::SetState(int state)
 	{
 	case PLAYER_STATE_WALKING_RIGHT:
 		vx = PLAYER_WALKING_SPEED;
-		nx = 1;
+		direction = 1;
 		break;
 	case PLAYER_STATE_WALKING_LEFT:
 		vx = -PLAYER_WALKING_SPEED;
-		nx = -1;
+		direction = -1;
 		break;
 	case PLAYER_STATE_JUMP: 
 		if (getOnGround() && getStateCommon()!=PLAYER_STATE_ON_STAIR) {
