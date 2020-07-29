@@ -21,16 +21,6 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 			CPlayer::getInstane()->SetState(PLAYER_STATE_JUMP);
 		}
 		break;
-	//case DIK_UP:
-	//	CPlayer::getInstane()->setPrepareGoStair(1);
-	//	break;
-	//case DIK_DOWN:
-	//	CPlayer::getInstane()->setPrepareGoStair(2);
-	//	//CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_STAIR_DOWN);
-	//	break;
-	//default:
-	//	CPlayer::getInstane()->setPrepareGoStair(0);
-	//	break;
 	}
 }
 
@@ -46,6 +36,9 @@ void CSampleKeyHandler::KeyState(BYTE *states)
 			CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_RIGHT);
 		else if (CWindow::GetInstance()->IsKeyDown(DIK_LEFT))
 			CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_LEFT);
-		else CPlayer::getInstane()->SetState(PLAYER_STATE_IDLE);
+		else if(CWindow::GetInstance()->IsKeyDown(DIK_DOWN))
+			CPlayer::getInstane()->SetState(PLAYER_STATE_SIT);
+		else 
+			CPlayer::getInstane()->SetState(PLAYER_STATE_IDLE);
 	}
 }

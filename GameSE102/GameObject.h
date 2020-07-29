@@ -59,7 +59,7 @@ public:
 	}
 
 	void SetState(int state) { this->state = state; }
-	int SetState() { return this->state; }
+	int GetState() { return this->state; }
 
 	void setStateCommon(int stateCommon) { this->stateCommon = stateCommon; }
 	int getStateCommon() { return this->stateCommon; }

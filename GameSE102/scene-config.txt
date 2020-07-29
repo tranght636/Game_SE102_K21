@@ -12,6 +12,7 @@ start	6
 # id	file_path	transparent_color_r	g	b
 [TEXTURES]
 0	textures\player\image.png	255	255	255
+1	textures\misc.png	0	10	0
 
 # id	left	top	right	bottom	texture_id
 [SPRITES]
@@ -25,6 +26,13 @@ start	6
 10004	75	2	90	32	0
 # down stair
 10005	60	2	75	32	0
+# jump
+10006	43	9	59	32	0
+
+# đuốc
+20001	148	60	164	92	1
+20002	166	60	182	92	1
+
 						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -32,7 +40,6 @@ start	6
 100	10001	100
 # walk
 101	10001	100	10002	100	10003	100
-
 # go on stair
 102	10004	100	10002	100
 # go down stair
@@ -41,9 +48,18 @@ start	6
 104	10004	100
 # stand down stair
 105	10005	100
+# jump
+106	10006	100
+# sit
+107	10006	100
+
+# Đuốc
+200	20001	100	20002	100
 
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
 # Player
-1	100	101	102	103	104	105
+1	100	101	102	103	104	105	106	107
+# Đuốc
+2	200

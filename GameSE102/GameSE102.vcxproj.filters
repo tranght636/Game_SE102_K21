@@ -99,6 +99,9 @@
     <ClCompile Include="Stair.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Duoc.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSampleKeyHandler.h">
@@ -162,6 +165,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Stair.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Duoc.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
