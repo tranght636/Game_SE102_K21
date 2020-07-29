@@ -67,7 +67,7 @@ class CAnimation
 public:
 	CAnimation(int defaultTime = ANI_DEFAUT_TIME);
 	void Add(int spriteId, DWORD time = 0);
-	void Render(float x, float y, int direction);
+	void Render(float x, float y, int direction = 1);
 	LPANIMATION_FRAME getCurrentFrame();
 	LPANIMATION_FRAME getNextFrame();
 };

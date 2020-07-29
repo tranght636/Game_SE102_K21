@@ -8,6 +8,7 @@
 #include "Portal.h"
 #include "CLayer.h"
 #include "CSampleKeyHandler.h"
+#include "Duoc.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_PORTAL	-1
 #define OBJECT_TYPE_BRICK	-2
 #define	OBJECT_TYPE_STAIR	-3
+#define OBJECT_TYPE_DUOC	1
 
 #define MAX_SCENE_LINE 1024
 
@@ -79,14 +81,19 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new Brick(x, y, width, height);
 		break;
 	}
-	case OBJECT_TYPE_PORTAL:
-	{
+	case OBJECT_TYPE_PORTAL: {
 		float r = atof(tokens[4].c_str());
 		float b = atof(tokens[5].c_str());
 		int scene_id = atoi(tokens[6].c_str());
 		obj = new CPortal(x, y, r, b, scene_id);
+		break;
 	}
-	break;
+	case OBJECT_TYPE_DUOC: {
+		obj = new Duoc();
+		//obj->setAni(ani_set_id);
+		break;
+	}
+	
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -211,9 +218,13 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
-	/*for (int i = 0; i < objects.size(); i++)
-		objects[i]->Render();*/
 	TileMap::getInstance()->render(Camera::getInstance());
+
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->Render();
+	}
+		
+	
 	
 	CPlayer::getInstane()->Render();
 	/*vector<LPGAMEOBJECT> bricks = objects;

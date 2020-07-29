@@ -2,6 +2,8 @@
 #include "Portal.h"
 #include "CSampleKeyHandler.h"
 
+bool isSit = false;
+
 CPlayer* CPlayer::instance = NULL;
 CPlayer* CPlayer::getInstane() {
 	if (instance == NULL) {
@@ -98,10 +100,6 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				break;
 			}
-			
-
-			
-			
 			break;
 		}
 		case PLAYER_STATE_NOMAL:
@@ -169,6 +167,9 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						if (e->ny < 0)	//ny < 0 player's bottom collie brick's top
 						{
 							this->setOnGround(true);
+							if (ani == PLAYER_ANI_JUMP) {
+								y -= 8;
+							}
 						}
 						/*float dw = getDW();
 						if (e->nx < 0 && dw > 0) {
@@ -205,40 +206,49 @@ void CPlayer::Render()
 		}
 		break;
 	case PLAYER_STATE_NOMAL:
-		if (vx == 0)
+		/*switch (this->state)
 		{
+		case PLAYER_STATE_IDLE:
 			ani = PLAYER_ANI_IDLE;
-			/*if (nx > 0) direction = TEXTURE_DIRECTION_RIGHT;
-			else direction = TEXTURE_DIRECTION_LEFT;*/
-		}
-		else if (vx > 0) {
+			break;
+		case PLAYER_STATE_WALKING_LEFT:
+		case PLAYER_STATE_WALKING_RIGHT:
 			ani = PLAYER_ANI_WALKING;
-			//direction = TEXTURE_DIRECTION_RIGHT;
+			break;
+		case PLAYER_STATE_JUMP:
+			ani = PLAYER_ANI_JUMP;
+			break;
+		case PLAYER_STATE_SIT:
+			ani = PLAYER_ANI_SIT;
+			break;
+		}*/
+
+
+
+		if (isOnGround) {
+			if (state == PLAYER_STATE_SIT) {
+				ani = PLAYER_ANI_SIT;
+			}
+			else if (vx == 0) {
+				if (isSit) {
+					isSit = false;
+					y -= 8;
+				}
+				ani = PLAYER_ANI_IDLE;
+			}
+			else {
+				if (isSit) {
+					isSit = false;
+					y -= 8;
+				}
+				ani = PLAYER_ANI_WALKING;
+			}
 		}
 		else {
-			ani = PLAYER_ANI_WALKING;
-			//direction = TEXTURE_DIRECTION_LEFT;
+			ani = PLAYER_ANI_JUMP;
 		}
 		break;
 	}
-	/*if (getStateStair()) {
-		
-	} else {
-		if (vx == 0)
-		{
-			ani = PLAYER_ANI_IDLE;
-			if (nx > 0) direction = TEXTURE_DIRECTION_RIGHT;
-			else direction = TEXTURE_DIRECTION_LEFT;
-		}
-		else if (vx > 0) {
-			ani = PLAYER_ANI_WALKING;
-			direction = TEXTURE_DIRECTION_RIGHT;
-		}
-		else {
-			ani = PLAYER_ANI_WALKING;
-			direction = TEXTURE_DIRECTION_LEFT;
-		}
-	}*/
 
 	animation_set->at(ani)->Render(x, y, direction);
 	//RenderBoundingBox(150);
@@ -256,18 +266,25 @@ void CPlayer::SetState(int state)
 	case PLAYER_STATE_WALKING_LEFT:
 		vx = -PLAYER_WALKING_SPEED;
 		direction = -1;
-		break;
+		break; 
 	case PLAYER_STATE_JUMP: 
-		if (getOnGround() && getStateCommon()!=PLAYER_STATE_ON_STAIR) {
+		if (getOnGround() 
+			&& getStateCommon()!=PLAYER_STATE_ON_STAIR) {
 			vy = -PLAYER_JUMP_SPEED_Y;
 			setOnGround(false);
 		}
+		break;
 	case PLAYER_STATE_IDLE:
 		vx = 0;
 		break;
-	/*case PLAYER_STATE_ON_STAIR:
-		setStateStair(true);
-		break;*/
+	case PLAYER_STATE_SIT:
+		if (isSit == false) {
+			isSit = true;
+			y += 5;
+		}
+		vx = 0;
+		break;
+	
 	}
 }
 

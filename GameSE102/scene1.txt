@@ -12,11 +12,15 @@ textures\scene\scene1\tilesheet.png	textures\scene\scene1\matrix.dat
 # Player
 0	20.0	0	1
 
+
+
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
 -1	752	100	0	768	150	2
-#-1	52	100	0	68	150	2
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ---
 -2	1	159	769	16
+
+# ĐUỐC
+1	112	128	2
