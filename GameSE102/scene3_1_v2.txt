@@ -4,13 +4,13 @@ textures\scene\scene3_1\tilesheet.png	textures\scene\scene3_1\matrix.dat
 
 [CAMERA]
 # 0: camera start to left, 1: camera start to right
-1
+0
 
 [OBJECTS]
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Player , 1 = Brick, Portal = 50
 # Player
-0	736	110	1
+0	96	-5	1
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
