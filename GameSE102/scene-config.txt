@@ -1,5 +1,5 @@
 [SETTINGS]
-start	6
+start	5
 #scene list
 [SCENES]
 1	scene1.txt
@@ -8,6 +8,7 @@ start	6
 4	scene3_1.txt
 5	scene3_2.txt
 6	scene4.txt
+7	scene2_v2.txt
 
 # id	file_path	transparent_color_r	g	b
 [TEXTURES]
@@ -27,7 +28,7 @@ start	6
 # down stair
 10005	60	2	75	32	0
 # jump
-10006	43	9	59	32	0
+10006	43	7	59	32	0
 
 # đuốc
 20001	148	60	164	92	1
