@@ -1,5 +1,5 @@
 [SETTINGS]
-start	5
+start	1
 #scene list
 [SCENES]
 1	scene1.txt
@@ -9,6 +9,7 @@ start	5
 5	scene3_2.txt
 6	scene4.txt
 7	scene2_v2.txt
+8	scene3_1_v2.txt
 
 # id	file_path	transparent_color_r	g	b
 [TEXTURES]

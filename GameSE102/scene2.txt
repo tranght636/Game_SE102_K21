@@ -14,7 +14,7 @@ textures\scene\scene2_1\tilesheet.png	textures\scene\scene2_1\matrix.dat
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
--1	120	-8	0	145	-7	3
+-1	120	-9	0	145	-8	3
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ---
