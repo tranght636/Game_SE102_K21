@@ -27,6 +27,7 @@ textures\scene\scene4\tilesheet.png	textures\scene\scene4\matrix.dat
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ---
+# type	l	t	w	h
 -2	1	177	767	13
 -2	0	81	111	14
 -2	128	113	176	14

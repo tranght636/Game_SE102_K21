@@ -10,12 +10,12 @@ textures\scene\scene2_2\tilesheet.png	textures\scene\scene2_2\matrix.dat
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Player , 1 = Brick, Portal = 50
 # Player
-#0	344	166
-0	463	40	1
+0	385	139	1
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
 -1	15	16	0	1	66	4
+-1	379	173	0	400	175	7
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ---
@@ -33,3 +33,7 @@ textures\scene\scene2_2\tilesheet.png	textures\scene\scene2_2\matrix.dat
 -2	352	80	30	49
 -2	480	2	31	171
 -2	464	98	15	13
+
+# STAIR
+#type	l	t	w	h	isTop isRightStair
+-3	465	80	16	16	1	1

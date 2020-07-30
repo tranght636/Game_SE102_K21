@@ -227,10 +227,10 @@ void CPlayScene::Render()
 	
 	
 	CPlayer::getInstane()->Render();
-	/*vector<LPGAMEOBJECT> bricks = objects;
+	vector<LPGAMEOBJECT> bricks = objects;
 	for (UINT i = 0; i < bricks.size(); i++) {
 		bricks[i]->RenderBoundingBox(150);
-	}*/
+	}
 	
 }
 

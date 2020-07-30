@@ -14,6 +14,9 @@ CPlayer* CPlayer::getInstane() {
 
 void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
+
+	
+
 	switch (stateCommon)
 	{
 		case PLAYER_STATE_ON_STAIR :
@@ -100,6 +103,30 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				break;
 			}
+			vector<LPCOLLISIONEVENT> coEvents;
+			coEvents.clear();
+			CalcPotentialCollisions(coObjects, coEvents);
+
+			float min_tx, min_ty, nx = 0, ny;
+			vector<LPCOLLISIONEVENT> coEventsResult;
+
+			if (coEvents.size() > 0) {
+				FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+			}
+
+			// Collision logic with orther object
+			for (UINT i = 0; i < coEventsResult.size(); i++)
+			{
+				LPCOLLISIONEVENT e = coEventsResult[i];
+
+				if (dynamic_cast<CPortal*>(e->obj))
+				{
+					CPortal* p = dynamic_cast<CPortal*>(e->obj);
+					CGame::GetInstance()->SwitchScene(p->GetSceneId());
+					break;
+				}
+			}
+
 			break;
 		}
 		case PLAYER_STATE_NOMAL:
@@ -168,7 +195,7 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						{
 							this->setOnGround(true);
 							if (ani == PLAYER_ANI_JUMP) {
-								y -= 8;
+								y -= 7;
 							}
 						}
 						/*float dw = getDW();
@@ -232,14 +259,14 @@ void CPlayer::Render()
 			else if (vx == 0) {
 				if (isSit) {
 					isSit = false;
-					y -= 8;
+					y -= 7;
 				}
 				ani = PLAYER_ANI_IDLE;
 			}
 			else {
 				if (isSit) {
 					isSit = false;
-					y -= 8;
+					y -= 7;
 				}
 				ani = PLAYER_ANI_WALKING;
 			}
@@ -278,9 +305,15 @@ void CPlayer::SetState(int state)
 		vx = 0;
 		break;
 	case PLAYER_STATE_SIT:
+		if (isGiaoStair) {
+			this->state = PLAYER_STATE_IDLE;
+			isGiaoStair = false;
+			vx = 0;
+			break;
+		}
 		if (isSit == false) {
 			isSit = true;
-			y += 5;
+			y += 3;
 		}
 		vx = 0;
 		break;

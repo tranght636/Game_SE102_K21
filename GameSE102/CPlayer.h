@@ -47,6 +47,7 @@ class CPlayer : public CGameObject
 	int stateOnStair;
 	int stairDirection;
 	bool isEndStair;
+	bool isGiaoStair;
 	float destX;
 	float destY;
 public:
@@ -70,6 +71,8 @@ public:
 	void setStairDirection(int dir) { this->stairDirection = dir; }
 	int getIsEndStair() { return isEndStair; }
 	void setIsEndStair(int isEndStair) { this->isEndStair = isEndStair; }
+	bool getIsGiaoStair() { return isGiaoStair; }
+	void setIsGiaoStair(bool isGiaoStair) { this->isGiaoStair = isGiaoStair; }
 	CPlayer();
 	~CPlayer();
 };

@@ -28,3 +28,7 @@ textures\scene\scene3_1\tilesheet.png	textures\scene\scene3_1\matrix.dat
 -2	736	83	30	13
 -2	287	115	32	14
 -2	417	116	30	14
+
+# STAIR
+#type	l	t	w	h	isTop isRightStair
+-3	144	66	14	16	0	0

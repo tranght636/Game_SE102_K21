@@ -15,6 +15,9 @@ void Stair::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CPlayer* player = CPlayer::getInstane();
 	float xPlayerOnStair, yPlayerOnStair;
 	if (Collision::checkAABB(this, CPlayer::getInstane())) {
+		if (this->isTop) {
+			player->setIsGiaoStair(true);
+		}
 		//if (CPlayer::getInstane()->getPrepareGoStair() == PLAYER_PREPARE_STAIR_UP) {
 		if (CSampleKeyHandler::isUpDown 
 			&& !this->isTop
@@ -59,14 +62,17 @@ void Stair::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		}
 		else if (player->getStateCommon() == PLAYER_STATE_ON_STAIR) {
 			float vy = player->getVy();
+			float vx = player->getVx();
 			if ((vy < 0 && this->isTop && this->isRightStair && player->getRight() > this->getX() + 2)
 				|| (vy < 0 && this->isTop && !this->isRightStair && player->getX() < this->getRight() - 2)) {
 				//player->setDirection(this->isRightStair ? 1 : -1);
-				player->setIsEndStair(true);
+				if (vx > 0 && this->isRightStair || vx < 0 && !this->isRightStair)
+					player->setIsEndStair(true);
 			}
 			if(vy > 0 && !this->isTop && this->getBottom() - 4 < player->getBottom()) {
 				//player->setDirection(this->isRightStair ? -1 : 1);
-				player->setIsEndStair(true);
+				if(vx > 0 && !this->isRightStair || vx < 0 && this->isRightStair)
+					player->setIsEndStair(true);
 			}
 		}
 			
