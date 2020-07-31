@@ -40,6 +40,7 @@ protected:
 	int state;
 	int stateCommon;
 	int direction;
+	bool isLastAni;
 	DWORD dt;
 	//static unordered_map<int, LPANIMATION> animations;
 
@@ -66,15 +67,18 @@ public:
 
 	float getX() { return this->x; }
 	float getY() { return this->y; }
+	void setX(float x) { this->x = x; }
+	void setY(float y) { this->y = y; }
 
 	float getWidth() {
-		if (ani != -1) {
+		/*if (ani != -1) {
 			LPANIMATION animations = animation_set->at(ani);
 			return animations->getCurrentFrame()->GetSprite()->getWidth();
 		}
 		else {
 			return this->width;
-		}
+		}*/
+		return this->width;
 	}
 	float getHeight() { 
 		if (ani != -1) {
@@ -112,8 +116,14 @@ public:
 	float getDirection() { return direction; }
 	void setDirection(int dir) { this->direction = dir; }
 
-	void setAni(int ani) { this->ani = ani; }
+	void setAni(int ani) { 
+		this->ani = ani; 
+		//animation_set->at(ani)->setCurrentFrame(0);
+	}
 	int getAni() { return this->ani; }
+
+	void setIsLastAni(bool isLastAni) { this->isLastAni = isLastAni; }
+	int getIsLastAni() { return this->isLastAni; }
 
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() {};

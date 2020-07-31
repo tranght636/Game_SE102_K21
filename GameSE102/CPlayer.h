@@ -2,10 +2,11 @@
 #include "GameObject.h"
 #include "DirectionTexture.h"
 #include "Brick.h"
+#include "Weapon.h"
 
 #define PLAYER_WALKING_SPEED	0.1f
 #define PLAYER_ON_STAIR_SPEED	0.04f
-#define PLAYER_JUMP_SPEED_Y		0.6f
+#define PLAYER_JUMP_SPEED_Y		0.4f
 #define PLAYER_GRAVITY			0.002f
 
 #define PLAYER_STATE_IDLE			0
@@ -18,6 +19,7 @@
 #define PLAYER_STATE_STAND_STAIR	501
 #define PLAYER_STATE_NOMAL	600
 #define PLAYER_STATE_ON_STAIR	700
+#define PLAYER_STATE_DUNG_DANH	1
 
 #define PLAYER_ANI_IDLE		0
 #define PLAYER_ANI_WALKING	1
@@ -27,6 +29,7 @@
 #define PLAYER_ANI_STAND_STAIR_DOWN	5
 #define PLAYER_ANI_JUMP	6
 #define PLAYER_ANI_SIT	7
+#define PLAYER_ANI_DUNG_DANH 8
 
 #define PLAYER_NO_PREPARE_STAIR 0
 #define PLAYER_PREPARE_STAIR_UP 1
@@ -35,6 +38,9 @@
 #define DXY_STAIR	8.0f
 #define PLAYER_ON_STAIR_LEFT -1
 #define PLAYER_ON_STAIR_RIGHT 1
+
+#define WEAPON_ROI_LEVEL1 101
+#define WEAPON_ROI_LEVEL2 100
 
 class CPlayer : public CGameObject
 {
@@ -50,6 +56,12 @@ class CPlayer : public CGameObject
 	bool isGiaoStair;
 	float destX;
 	float destY;
+
+	//Weapon* weapon;
+
+	int levelWeapon;
+	unordered_map<int, Weapon*> weapons;
+
 public:
 	static CPlayer * getInstane();
 	//void Init();
@@ -73,6 +85,16 @@ public:
 	void setIsEndStair(int isEndStair) { this->isEndStair = isEndStair; }
 	bool getIsGiaoStair() { return isGiaoStair; }
 	void setIsGiaoStair(bool isGiaoStair) { this->isGiaoStair = isGiaoStair; }
+	int getCurrentFrame();
+
+	/*void setWeapon(Weapon* w) { this->weapon = w; }
+	Weapon* getWeapon() { return this->weapon; }*/
+
+	Weapon* getWeapon() { return weapons[levelWeapon]; }
+	void addWeapon(int id, Weapon* w) { weapons[id] = w; }
+
+	void setWeaponLevel(int level) { this->levelWeapon = level; }
+	
 	CPlayer();
 	~CPlayer();
 };

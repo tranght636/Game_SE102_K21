@@ -15,8 +15,11 @@ start	1
 [TEXTURES]
 0	textures\player\image.png	255	255	255
 1	textures\misc.png	0	10	0
+2	textures\player\simon_danh.png	255	255	255
+3	textures\weapon.png	0	64	128
+4	textures\player\danh.png	255	255	255
 
-# id	left	top	right	bottom	texture_id
+# id	left	top	right	bottom	texture_id	achorX	achorY
 [SPRITES]
 # Player
 # idle
@@ -30,10 +33,28 @@ start	1
 10005	60	2	75	32	0
 # jump
 10006	43	7	59	32	0
+# dung danh
+10007	0	1	32	31	2	16	0
+10008	32	1	64	31	2	16	1
+10009	64	1	124	31	2	0	1
+
+10010	0	1	24	31	4	9	0
+10011	24	1	40	31	4	1	0
+10012	40	1	62	31	4	1	0
 
 # đuốc
 20001	148	60	164	92	1
 20002	166	60	182	92	1
+
+# vu khi - roi vang
+30001	5	63	13	87	3
+30002	23	66	38	86	3
+30003	42	71	84	77	3
+
+# vu khi - roi trang
+30004	5	5	13	28	3
+30005	23	11	37	28	3
+30006	45	15	69	21	3
 
 						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
@@ -54,14 +75,32 @@ start	1
 106	10006	100
 # sit
 107	10006	100
+# dung danh
+108	10007	2000	10008	2000	10009	2000
+109	10010	100	10011	100	10012	120
+#109	10010	2000	10011	2000	10012	2000
+
 
 # Đuốc
 200	20001	100	20002	100
+
+# roi
+300	30001	100	30002	100	30003	100
+301	30004	100	30005	100	30006	100
 
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
 # Player
-1	100	101	102	103	104	105	106	107
+1	100	101	102	103	104	105	106	107	109	108
 # Đuốc
 2	200
+# roi
+3	300
+4	301
+
+[WEAPON]
+#id	ani_set_id
+#weapon
+100	3
+101	4

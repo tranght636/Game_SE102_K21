@@ -14,13 +14,16 @@ class CSprite
 	int top;
 	int right;
 	int bottom;
+	int achorX;
+	int achorY;
 
 	LPDIRECT3DTEXTURE9 texture;
 public:
-	CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
+	CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex, int achorX = -1, int achorY = -1);
 	int getWidth();
 	int getHeight();
 	void Draw(float x, float y);
+	int getAchorX() { return this->achorX; }
 };
 
 typedef CSprite * LPSPRITE;
@@ -35,7 +38,7 @@ class CSprites
 	unordered_map<int, LPSPRITE> sprites;
 
 public:
-	void Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
+	void Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex, int achorX, int achorY);
 	LPSPRITE Get(int id);
 	void Clear();
 	static CSprites * GetInstance();
@@ -53,23 +56,30 @@ public:
 	CAnimationFrame(LPSPRITE sprite, int time) { this->sprite = sprite; this->time = time; }
 	DWORD GetTime() { return time; }
 	LPSPRITE GetSprite() { return sprite; }
+	void render(float x, float y, int direction = 1);
 };
 
 typedef CAnimationFrame *LPANIMATION_FRAME;
 
 class CAnimation
 {
+	int id;
 	DWORD lastFrameTime;
 	int defaultTime;
 	int currentFrame;
 	int nextFrame;
 	vector<LPANIMATION_FRAME> frames;
 public:
+	void setId(int id) { this->id = id; }
+	int getId() { this->id; }
 	CAnimation(int defaultTime = ANI_DEFAUT_TIME);
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y, int direction = 1);
 	LPANIMATION_FRAME getCurrentFrame();
+	LPANIMATION_FRAME getFrame(int frame) { return frames[frame]; }
 	LPANIMATION_FRAME getNextFrame();
+	void setCurrentFrame(int currentFrame) { this->currentFrame = currentFrame; }
+	int getCurrentFrameIndex() { return currentFrame == -1 ? 0 : currentFrame; }
 };
 
 typedef CAnimation* LPANIMATION;

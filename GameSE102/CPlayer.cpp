@@ -253,7 +253,17 @@ void CPlayer::Render()
 
 
 		if (isOnGround) {
-			if (state == PLAYER_STATE_SIT) {
+			if (state == PLAYER_STATE_DUNG_DANH) {
+				if (isLastAni) {
+					SetState(PLAYER_STATE_IDLE);
+					ani = PLAYER_ANI_IDLE;
+				}
+				else {
+					ani = PLAYER_ANI_DUNG_DANH;
+				}
+				
+			}
+			else if (state == PLAYER_STATE_SIT) {
 				ani = PLAYER_ANI_SIT;
 			}
 			else if (vx == 0) {
@@ -278,6 +288,7 @@ void CPlayer::Render()
 	}
 
 	animation_set->at(ani)->Render(x, y, direction);
+	getWeapon()->Render();
 	//RenderBoundingBox(150);
 }
 
@@ -317,21 +328,32 @@ void CPlayer::SetState(int state)
 		}
 		vx = 0;
 		break;
-	
+
+	case PLAYER_STATE_DUNG_DANH:
+		isLastAni = false;
+		vx = 0;
+		break;
 	}
+	
+}
+
+int CPlayer::getCurrentFrame() {
+	return this->animation_set->at(ani)->getCurrentFrameIndex();
 }
 
 void CPlayer::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
 	left = x;
 	top = y;
-	right = x + 16;	// getAnimation(animationIndex)->getFrame(frameIndex)->getWidth();
+	right = x + getWidth();	// getAnimation(animationIndex)->getFrame(frameIndex)->getWidth();
 	bottom = y + this->getHeight(); // ||||||||
 }
 
 CPlayer::CPlayer() {
 	isOnGround = false;
 	stateCommon = PLAYER_STATE_NOMAL;
+	width = 16;
+	levelWeapon = WEAPON_ROI_LEVEL1;
 }
 
 CPlayer::~CPlayer() {

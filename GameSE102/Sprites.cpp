@@ -1,9 +1,10 @@
 #include "Sprites.h"
 #include "debug.h"
 #include "CWindow.h"
+#include "DirectionTexture.h"
 
 
-CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex)
+CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex, int achorX, int achorY)
 {
 	this->id = id;
 	this->left = left;
@@ -11,6 +12,8 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEX
 	this->right = right;
 	this->bottom = bottom;
 	this->texture = tex;
+	this->achorX = achorX;
+	this->achorY = achorY;
 }
 
 int CSprite::getWidth() {
@@ -21,9 +24,11 @@ int CSprite::getHeight() {
 	return bottom - top;
 }
 
+
+
 void CSprite::Draw(float x, float y)
 {
-	CWindow::GetInstance()->Draw(x, y, texture, left, top, right, bottom);
+	CWindow::GetInstance()->Draw(x, y, texture, left, top, right, bottom, achorX, achorY);
 }
 
 CSprites * CSprites::__instance = NULL;
@@ -36,9 +41,9 @@ CSprites *CSprites::GetInstance()
 
 
 
-void CSprites::Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex)
+void CSprites::Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex, int achorX, int achorY)
 {
-	LPSPRITE s = new CSprite(id, left, top, right, bottom, tex);
+	LPSPRITE s = new CSprite(id, left, top, right, bottom, tex, achorX, achorY);
 	sprites[id] = s;
 }
 
@@ -47,10 +52,18 @@ LPSPRITE CSprites::Get(int id)
 	return sprites[id];
 }
 
+void CAnimationFrame::render(float x, float y, int direction) {
+	if (direction == TEXTURE_DIRECTION_LEFT) {
+		DirectionTexture::getInstance()->SetDirection(TEXTURE_DIRECTION_LEFT, x, this->sprite->getWidth(), this->sprite->getWidth());
+	}
+	this->sprite->Draw(x, y);
+	DirectionTexture::getInstance()->SetDirection(TEXTURE_DIRECTION_RIGHT, x, this->sprite->getWidth(), this->sprite->getWidth());
+}
+
 CAnimation::CAnimation(int defaultTime) {
 	this->defaultTime = defaultTime;
 	lastFrameTime = -1; 
-	currentFrame = 0;
+	currentFrame = -1;
 }
 
 void CAnimation::Add(int spriteId, DWORD time)
@@ -86,22 +99,36 @@ void CAnimation::Render(float x, float y, int direction)
 			currentFrame++;
 			nextFrame++;
 			lastFrameTime = now;
-			if (currentFrame == frames.size()) currentFrame = 0;
-			if (nextFrame == frames.size()) nextFrame = 0;
+			if (this->id == 108 || this->id == 109) {
+				CPlayer::getInstane()->setIsLastAni(false);
+				if (currentFrame >= frames.size()) {
+					CPlayer::getInstane()->setIsLastAni(true);
+					currentFrame = -1;
+					return;
+				}
+			}
+			
+			if (currentFrame >= frames.size()) {
+				currentFrame = 0;
+			}
+			if (nextFrame >= frames.size()) nextFrame = 0;
 		}
 	}
 	
 	LPANIMATION_FRAME frame = frames[currentFrame];
+	LPANIMATION_FRAME frame2 = frames[0];
+	float width = frame2->GetSprite()->getWidth() - (frame2->GetSprite()->getAchorX() < 0 ? 0 : frame2->GetSprite()->getAchorX());
 	if (direction == TEXTURE_DIRECTION_LEFT) {
-		DirectionTexture::getInstance()->SetDirection(TEXTURE_DIRECTION_LEFT, x, frame->GetSprite()->getWidth());
+		DirectionTexture::getInstance()->SetDirection(TEXTURE_DIRECTION_LEFT, x, frame->GetSprite()->getWidth(), width);
 	}
 	frame->GetSprite()->Draw(x, y);
-	DirectionTexture::getInstance()->SetDirection(TEXTURE_DIRECTION_RIGHT, x, frame->GetSprite()->getWidth());
+	DirectionTexture::getInstance()->SetDirection(TEXTURE_DIRECTION_RIGHT, x, frame->GetSprite()->getWidth(), width);
 
 }
 
 LPANIMATION_FRAME CAnimation::getCurrentFrame() {
-	return frames[currentFrame];
+	
+	return frames[currentFrame == -1 ? 0 : currentFrame];
 }
 
 LPANIMATION_FRAME CAnimation::getNextFrame() {
@@ -120,6 +147,7 @@ CAnimations * CAnimations::GetInstance()
 
 void CAnimations::Add(int id, LPANIMATION ani)
 {
+	ani->setId(id);
 	animations[id] = ani;
 }
 

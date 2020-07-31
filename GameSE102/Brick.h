@@ -8,8 +8,6 @@ class Brick : public CGameObject
 	static Brick* instance;
 public:
 	static Brick* getInstance();
-	void init();
-	void render();
 	Brick(float x, float y, float width, float height);
 	Brick();
 	~Brick();

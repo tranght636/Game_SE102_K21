@@ -25,6 +25,9 @@ textures\scene\scene1\tilesheet.png	textures\scene\scene1\matrix.dat
 # ĐUỐC
 1	90	128	2
 1	220	128	2
-1	350	128	2
+1	350	128	2	
 1	470	128	2
 1	610	128	2
+
+# roi
+2	15	20	3
