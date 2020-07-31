@@ -16,10 +16,14 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	
 	switch (KeyCode)
 	{
+	case DIK_X:
 	case DIK_SPACE:
 		if (CPlayer::getInstane()->getStateCommon() != PLAYER_STATE_ON_STAIR) {
 			CPlayer::getInstane()->SetState(PLAYER_STATE_JUMP);
 		}
+		break;
+	case DIK_Z:
+		CPlayer::getInstane()->SetState(PLAYER_STATE_DUNG_DANH);
 		break;
 	}
 }
@@ -31,14 +35,16 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 
 void CSampleKeyHandler::KeyState(BYTE *states)
 {
-	if (CPlayer::getInstane()->getStateCommon() != PLAYER_STATE_ON_STAIR) {
+	CPlayer* player = CPlayer::getInstane();
+	if (player->getStateCommon() != PLAYER_STATE_ON_STAIR
+		&& player->GetState() != PLAYER_STATE_DUNG_DANH) {
 		if (CWindow::GetInstance()->IsKeyDown(DIK_RIGHT))
-			CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_RIGHT);
+			player->SetState(PLAYER_STATE_WALKING_RIGHT);
 		else if (CWindow::GetInstance()->IsKeyDown(DIK_LEFT))
-			CPlayer::getInstane()->SetState(PLAYER_STATE_WALKING_LEFT);
+			player->SetState(PLAYER_STATE_WALKING_LEFT);
 		else if(CWindow::GetInstance()->IsKeyDown(DIK_DOWN))
-			CPlayer::getInstane()->SetState(PLAYER_STATE_SIT);
-		else 
-			CPlayer::getInstane()->SetState(PLAYER_STATE_IDLE);
+			player->SetState(PLAYER_STATE_SIT);
+		else if(player->GetState() != PLAYER_STATE_DUNG_DANH)
+			player->SetState(PLAYER_STATE_IDLE);
 	}
 }

@@ -102,6 +102,9 @@
     <ClCompile Include="Duoc.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSampleKeyHandler.h">
@@ -168,6 +171,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Duoc.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

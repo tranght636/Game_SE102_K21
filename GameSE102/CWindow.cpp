@@ -58,15 +58,16 @@ void CWindow::Init(HWND hWnd)
 /*
 	Utility function to wrap LPD3DXSPRITE::Draw
 */
-void CWindow::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CWindow::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int achorX, int achorY, int alpha)
 {
 	D3DXVECTOR3 p(floor(x-Camera::getInstance()->getX()), y, 0);
+
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
-	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	spriteHandler->Draw(texture, &r, &D3DXVECTOR3(achorX, achorY, 0), &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 int CWindow::IsKeyDown(int KeyCode)

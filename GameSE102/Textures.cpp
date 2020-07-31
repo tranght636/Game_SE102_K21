@@ -20,7 +20,7 @@ LPDIRECT3DTEXTURE9 CTextures::Get(unsigned int i)
 }
 
 CTextures::CTextures() {
-	Add(ID_TEX_PLAYER, L"textures\\player\\image.png", D3DCOLOR_ARGB(255, 255, 255, 255));
+	//Add(ID_TEX_PLAYER, L"textures\\player\\image.png", D3DCOLOR_ARGB(255, 255, 255, 255));
 	Add(ID_TEX_BBOX, L"textures\\bbox.png");
 }
 CTextures::~CTextures() {}

@@ -12,7 +12,7 @@ class DirectionTexture
 	static DirectionTexture* instance;
 public:
 	static DirectionTexture* getInstance();
-	void SetDirection(int direction, int x, int width);
+	void SetDirection(int direction, int x, int widthCurrent, int width);
 	DirectionTexture();
 	~DirectionTexture();
 };

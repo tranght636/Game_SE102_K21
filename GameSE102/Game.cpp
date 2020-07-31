@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Utils.h"
 #include "PlayScence.h"
+#include "Weapon.h"
 
 
 CGame * CGame::__instance = NULL;
@@ -34,6 +35,7 @@ CGame::~CGame()
 #define SCENE_SECTION_SPRITES	4
 #define SCENE_SECTION_ANIMATIONS 5
 #define SCENE_SECTION_ANIMATION_SETS	6
+#define SCENE_SECTION_WEAPON	7
 
 void CGame::_ParseSection_SETTINGS(string line)
 {
@@ -85,6 +87,11 @@ void CGame::_ParseSection_SPRITES(string line)
 	int r = atoi(tokens[3].c_str());
 	int b = atoi(tokens[4].c_str());
 	int texID = atoi(tokens[5].c_str());
+	int achorX = 0, achorY = 0;
+	if (tokens.size() == 8) {
+		achorX = atoi(tokens[6].c_str());
+		achorY = atoi(tokens[7].c_str());
+	}
 
 	LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(texID);
 	if (tex == NULL)
@@ -93,7 +100,7 @@ void CGame::_ParseSection_SPRITES(string line)
 		return;
 	}
 
-	CSprites::GetInstance()->Add(ID, l, t, r, b, tex);
+	CSprites::GetInstance()->Add(ID, l, t, r, b, tex, achorX, achorY);
 }
 
 void CGame::_ParseSection_ANIMATIONS(string line)
@@ -140,6 +147,24 @@ void CGame::_ParseSection_ANIMATION_SETS(string line)
 
 	CAnimationSets::GetInstance()->Add(ani_set_id, s);
 }
+void CGame::_ParseSection_WEAPON(string line)
+{
+	vector<string> tokens = split(line);
+
+	//DebugOut(L"--> %s\n",ToWSTR(line).c_str());
+
+	if (tokens.size() < 2) return; // skip invalid lines - an object set must have at least id, x, y
+
+	int id = atoi(tokens[0].c_str());
+	int ani_set_id = atof(tokens[1].c_str());
+
+	CAnimationSets * animation_sets = CAnimationSets::GetInstance();
+	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
+	CGameObject *w = new Weapon();
+	w->SetAnimationSet(ani_set);
+	CPlayer::getInstane()->addWeapon(id, (Weapon*)w);
+}
+
 
 
 /*
@@ -168,6 +193,7 @@ void CGame::Load(LPCWSTR gameFile)
 		if (line == "[SPRITES]") { section = SCENE_SECTION_SPRITES; continue; }
 		if (line == "[ANIMATIONS]") { section = SCENE_SECTION_ANIMATIONS; continue; }
 		if (line == "[ANIMATION_SETS]") { section = SCENE_SECTION_ANIMATION_SETS; continue; }
+		if (line == "[WEAPON]") { section = SCENE_SECTION_WEAPON; continue; }
 		//
 		// data section
 		//
@@ -179,6 +205,7 @@ void CGame::Load(LPCWSTR gameFile)
 		case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
 		case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
 		case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
+		case SCENE_SECTION_WEAPON: _ParseSection_WEAPON(line); break;
 		}
 	}
 	f.close();

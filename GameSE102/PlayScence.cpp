@@ -9,6 +9,7 @@
 #include "CLayer.h"
 #include "CSampleKeyHandler.h"
 #include "Duoc.h"
+#include "Weapon.h"
 
 using namespace std;
 
@@ -33,6 +34,9 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_BRICK	-2
 #define	OBJECT_TYPE_STAIR	-3
 #define OBJECT_TYPE_DUOC	1
+#define OBJECT_TYPE_VUKHI	2
+
+
 
 #define MAX_SCENE_LINE 1024
 
@@ -90,9 +94,13 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 	case OBJECT_TYPE_DUOC: {
 		obj = new Duoc();
-		//obj->setAni(ani_set_id);
 		break;
 	}
+	/*case OBJECT_TYPE_VUKHI: {
+		obj = new Weapon();
+		CPlayer::getInstane()->setWeapon((Weapon* )obj);
+		break;
+	}*/
 	
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
@@ -188,15 +196,15 @@ void CPlayScene::Update(DWORD dt)
 	//// We know that Mario is the first object in the list hence we won't add him into the colliable object list
 	//// TO-DO: This is a "dirty" way, need a more organized way 
 
-	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
+	//vector<LPGAMEOBJECT> coObjects;
+	/*for (size_t i = 1; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
-	}
+	}*/
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-		objects[i]->Update(dt, &coObjects);
+		objects[i]->Update(dt, &objects);
 	}
 
 	//// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
@@ -219,17 +227,16 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	TileMap::getInstance()->render(Camera::getInstance());
-
+	
 	for (int i = 0; i < objects.size(); i++) {
+		//if (dynamic_cast<Weapon*>(objects[i])) continue;
 		objects[i]->Render();
 	}
 		
-	
-	
 	CPlayer::getInstane()->Render();
-	for (UINT i = 0; i < objects.size(); i++) {
+	/*for (UINT i = 0; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(150);
-	}
+	}*/
 	
 }
 
