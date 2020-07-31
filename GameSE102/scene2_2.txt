@@ -37,3 +37,9 @@ textures\scene\scene2_2\tilesheet.png	textures\scene\scene2_2\matrix.dat
 # STAIR
 #type	l	t	w	h	isTop isRightStair
 -3	465	80	16	16	1	1
+
+# nguoi linh
+4	327	40	6
+4	128	32	6
+# con doi
+5	298	13	7

@@ -28,6 +28,8 @@ struct CCollisionEvent
 class CGameObject
 {
 protected:
+	float start_x;			// initial position of Player at scene
+	float start_y;
 	float x;
 	float y;
 	float width;
@@ -51,6 +53,11 @@ public:
 	//static void AddAnimation(int aniId);
 
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
+
+	void setStart(float x, float y) { this->start_x = x, this->start_y = y; }
+	void getStart(float &x, float &y) { x = this->start_x, y = this->start_y; }
+	float getStartX() { return this->start_x; }
+
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void setSize(float x, float y, float width, float height) {
 		this->x = x;

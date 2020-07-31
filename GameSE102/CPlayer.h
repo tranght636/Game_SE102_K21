@@ -20,6 +20,7 @@
 #define PLAYER_STATE_NOMAL	600
 #define PLAYER_STATE_ON_STAIR	700
 #define PLAYER_STATE_DUNG_DANH	1
+#define PLAYER_STATE_DOI_NGUOC	2
 
 #define PLAYER_ANI_IDLE		0
 #define PLAYER_ANI_WALKING	1
@@ -30,6 +31,7 @@
 #define PLAYER_ANI_JUMP	6
 #define PLAYER_ANI_SIT	7
 #define PLAYER_ANI_DUNG_DANH 8
+#define PLAYER_ANI_DOI_NGUOC 10
 
 #define PLAYER_NO_PREPARE_STAIR 0
 #define PLAYER_PREPARE_STAIR_UP 1
@@ -45,8 +47,7 @@
 class CPlayer : public CGameObject
 {
 	static CPlayer * instance;
-	float start_x;			// initial position of Player at scene
-	float start_y;
+	
 	int isPrepareGoStair;	// 0: no up or down key. 1: up. 2: down
 	bool isStateStair;
 	bool isOnGround;
@@ -54,6 +55,7 @@ class CPlayer : public CGameObject
 	int stairDirection;
 	bool isEndStair;
 	bool isGiaoStair;
+	bool isDoiNguoc;
 	float destX;
 	float destY;
 
@@ -86,6 +88,8 @@ public:
 	bool getIsGiaoStair() { return isGiaoStair; }
 	void setIsGiaoStair(bool isGiaoStair) { this->isGiaoStair = isGiaoStair; }
 	int getCurrentFrame();
+	void setIsDoiNguoc(bool isDoiNguoc) { this->isDoiNguoc = isDoiNguoc; }
+	bool getIsDoiNguoc() { return this->isDoiNguoc; }
 
 	/*void setWeapon(Weapon* w) { this->weapon = w; }
 	Weapon* getWeapon() { return this->weapon; }*/

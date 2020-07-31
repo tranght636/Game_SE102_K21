@@ -37,14 +37,15 @@ void CSampleKeyHandler::KeyState(BYTE *states)
 {
 	CPlayer* player = CPlayer::getInstane();
 	if (player->getStateCommon() != PLAYER_STATE_ON_STAIR
-		&& player->GetState() != PLAYER_STATE_DUNG_DANH) {
+		&& player->GetState() != PLAYER_STATE_DUNG_DANH
+		&& !player->getIsDoiNguoc()) {
 		if (CWindow::GetInstance()->IsKeyDown(DIK_RIGHT))
 			player->SetState(PLAYER_STATE_WALKING_RIGHT);
 		else if (CWindow::GetInstance()->IsKeyDown(DIK_LEFT))
 			player->SetState(PLAYER_STATE_WALKING_LEFT);
 		else if(CWindow::GetInstance()->IsKeyDown(DIK_DOWN))
 			player->SetState(PLAYER_STATE_SIT);
-		else if(player->GetState() != PLAYER_STATE_DUNG_DANH)
+		else if(player->GetState() != PLAYER_STATE_DUNG_DANH )
 			player->SetState(PLAYER_STATE_IDLE);
 	}
 }

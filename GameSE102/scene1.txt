@@ -29,5 +29,9 @@ textures\scene\scene1\tilesheet.png	textures\scene\scene1\matrix.dat
 1	470	128	2
 1	610	128	2
 
-# roi
-2	15	20	3
+# ZOOMBIE
+3	250	128	5
+3	280	128	5
+3	380	128	5
+3	580	128	5
+3	680	128	5

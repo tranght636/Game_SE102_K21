@@ -10,6 +10,10 @@
 #include "CSampleKeyHandler.h"
 #include "Duoc.h"
 #include "Weapon.h"
+#include "Zoombie.h"
+#include "Linh.h"
+#include "Bat.h"
+#include "DenCay.h"
 
 using namespace std;
 
@@ -35,6 +39,10 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define	OBJECT_TYPE_STAIR	-3
 #define OBJECT_TYPE_DUOC	1
 #define OBJECT_TYPE_VUKHI	2
+#define OBJECT_TYPE_ZOOMBIE	3
+#define	OBJECT_TYPE_LINH	4
+#define	OBJECT_TYPE_BAT		5
+#define OBJECT_TYPE_DEN_CAY	6
 
 
 
@@ -96,6 +104,25 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new Duoc();
 		break;
 	}
+
+	case OBJECT_TYPE_ZOOMBIE: {
+		obj = new Zoombie();
+		break;
+	}
+
+	case OBJECT_TYPE_LINH: {
+		obj = new Linh();
+		break;
+	}
+	case OBJECT_TYPE_BAT: {
+		obj = new Bat();
+		break;
+	}
+	case OBJECT_TYPE_DEN_CAY: {
+		obj = new DenCay();
+		break;
+	}
+
 	/*case OBJECT_TYPE_VUKHI: {
 		obj = new Weapon();
 		CPlayer::getInstane()->setWeapon((Weapon* )obj);
@@ -109,6 +136,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	// General object setup
 	obj->SetPosition(x, y);
+	obj->setStart(x, y);
 
 	// if object < 0 -> object no have sprite and animation.
 	if (object_type > 0) {
