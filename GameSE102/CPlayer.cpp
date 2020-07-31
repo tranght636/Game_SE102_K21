@@ -1,6 +1,7 @@
 #include "CPLayer.h"
 #include "Portal.h"
 #include "CSampleKeyHandler.h"
+#include "QuaiVat.h"
 
 bool isSit = false;
 
@@ -194,9 +195,14 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						if (e->ny < 0)	//ny < 0 player's bottom collie brick's top
 						{
 							this->setOnGround(true);
+							
 							if (ani == PLAYER_ANI_JUMP) {
 								y -= 7;
 							}
+							
+						}
+						if (isDoiNguoc) {
+							isDoiNguoc = false;
 						}
 						/*float dw = getDW();
 						if (e->nx < 0 && dw > 0) {
@@ -207,6 +213,22 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						}*/
 
 					}
+					else if (dynamic_cast<QuaiVat*>(e->obj)) {
+						if (e->nx < 0) {
+							vx = -0.2;
+							direction = 1;
+						}
+						else if (e->nx > 0) {
+							vx = 0.2;
+							direction = -1;
+						}
+						
+						vy = -0.2;
+						if (e->ny > 0) {
+							vy = 0.05;
+						}
+						isDoiNguoc = true;
+					}
 					else if (dynamic_cast<CPortal*>(e->obj))
 					{
 						CPortal* p = dynamic_cast<CPortal*>(e->obj);
@@ -215,6 +237,8 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					}
 				}
 			}
+
+			//
 
 			// clean up collision events
 			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
@@ -251,8 +275,10 @@ void CPlayer::Render()
 		}*/
 
 
-
-		if (isOnGround) {
+		if (isDoiNguoc) {
+			ani = PLAYER_ANI_DOI_NGUOC;
+		}
+		else if (isOnGround) {
 			if (state == PLAYER_STATE_DUNG_DANH) {
 				if (isLastAni) {
 					SetState(PLAYER_STATE_IDLE);

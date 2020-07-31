@@ -3,6 +3,7 @@
 #include "CWindow.h"
 #include "Stair.h"
 #include "Duoc.h"
+#include "DenCay.h"
 
 //unordered_map<int, LPANIMATION> CGameObject::animations;
 
@@ -77,7 +78,7 @@ void CGameObject::CalcPotentialCollisions(
 	{
 		if (dynamic_cast<Stair*>(coObjects->at(i))) continue;
 		if (dynamic_cast<Duoc*>(coObjects->at(i))) continue;
-
+		if (dynamic_cast<DenCay*>(coObjects->at(i))) continue;
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
 		if (e->t > 0 && e->t <= 1.0f)

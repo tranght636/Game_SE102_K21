@@ -1,5 +1,5 @@
 [SETTINGS]
-start	1
+start	2
 #scene list
 [SCENES]
 1	scene1.txt
@@ -18,6 +18,7 @@ start	1
 2	textures\player\simon_danh.png	255	255	255
 3	textures\weapon.png	0	64	128
 4	textures\player\danh.png	255	255	255
+5	textures\quaivat.png	168	40	88
 
 # id	left	top	right	bottom	texture_id	achorX	achorY
 [SPRITES]
@@ -56,6 +57,26 @@ start	1
 30005	23	11	37	28	3
 30006	45	15	69	21	3
 
+#Quai vat
+#Zoombie
+40001	9	2	25	34	5
+40002	34	2	50	34	5
+
+#	nguoi linh
+50001	7	95	24	128	5
+50002	35	95	52	128	5
+50003	64	95	82	128	5
+
+#	con doi
+60001	103	67	114	81	5
+60002	124	68	140	81	5
+60003	151	70	167	79	5
+60004	178	66	194	81	5	
+
+# cai den
+70001	37	21	46	38	1
+70002	47	21	56	38	1
+
 						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -79,6 +100,8 @@ start	1
 108	10007	2000	10008	2000	10009	2000
 109	10010	100	10011	100	10012	120
 #109	10010	2000	10011	2000	10012	2000
+# doi nguoc
+110	10005	100
 
 
 # Đuốc
@@ -88,16 +111,39 @@ start	1
 300	30001	100	30002	100	30003	100
 301	30004	100	30005	100	30006	100
 
+# quai vat
+#Zoombie
+400	40001	100	40002	100
+
+# nguoi linh
+500	50001	100	50002	100	50003	100
+# con doi
+600	60001	100	60002	100	60003	100	60004	100
+# cai den
+700	70001	100	70002	100
+
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
 # Player
-1	100	101	102	103	104	105	106	107	109	108
+1	100	101	102	103	104	105	106	107	109	108	110
 # Đuốc
 2	200
+
+# Quai vat
+#Zoombie
+5	400
+
 # roi
 3	300
 4	301
+
+# nguoi linh
+6	500
+# con doi
+7	600
+# cai den
+8	700
 
 [WEAPON]
 #id	ani_set_id

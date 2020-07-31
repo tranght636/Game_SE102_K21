@@ -105,6 +105,21 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Zoombie.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="QuaiVat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Linh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DenCay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSampleKeyHandler.h">
@@ -175,6 +190,21 @@
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Zoombie.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="QuaiVat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Linh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DenCay.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
