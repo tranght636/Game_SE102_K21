@@ -41,8 +41,14 @@
 #define PLAYER_ON_STAIR_LEFT -1
 #define PLAYER_ON_STAIR_RIGHT 1
 
-#define WEAPON_ROI_LEVEL1 101
-#define WEAPON_ROI_LEVEL2 100
+//#define WEAPON_ROI_LEVEL1 0
+//#define WEAPON_ROI_LEVEL2 1
+
+enum WeaponLevel {
+	WEAPON_ROI_LEVEL1 = 1,
+	WEAPON_ROI_LEVEL2 = 2,
+	LEVEL_FINAL
+};
 
 class CPlayer : public CGameObject
 {
@@ -58,6 +64,7 @@ class CPlayer : public CGameObject
 	bool isDoiNguoc;
 	float destX;
 	float destY;
+	int directionStart;
 
 	//Weapon* weapon;
 
@@ -98,7 +105,10 @@ public:
 	void addWeapon(int id, Weapon* w) { weapons[id] = w; }
 
 	void setWeaponLevel(int level) { this->levelWeapon = level; }
-	
+	void increaseWeaponLevel();
+
+	void setDirectionStart(int direction) { this->directionStart = direction; }
+	int getDirectionStart() { return this->directionStart; }
 	CPlayer();
 	~CPlayer();
 };

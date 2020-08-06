@@ -10,7 +10,8 @@ textures\scene\scene3_1\tilesheet.png	textures\scene\scene3_1\matrix.dat
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Player , 1 = Brick, Portal = 50
 # Player
-0	736	110	1
+# type	x	y	ani_set_id	start_x	start_y	direction_start
+0	736	110	1	736	110	-1
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id

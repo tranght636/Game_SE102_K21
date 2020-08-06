@@ -37,6 +37,9 @@
     <Filter Include="SenceManager">
       <UniqueIdentifier>{13e89c1d-be3f-4849-8dfd-177c29b20b71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{a91fefea-63a6-4498-a375-c2c8d1114bec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -108,17 +111,20 @@
     <ClCompile Include="Zoombie.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="QuaiVat.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Linh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bat.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="DenCay.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Linh.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="QuaiVat.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RoiItem.cpp">
+      <Filter>Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,17 +200,20 @@
     <ClInclude Include="Zoombie.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="QuaiVat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Linh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Bat.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="DenCay.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Linh.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="QuaiVat.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RoiItem.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

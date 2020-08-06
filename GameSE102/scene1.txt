@@ -10,7 +10,8 @@ textures\scene\scene1\tilesheet.png	textures\scene\scene1\matrix.dat
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Player , -2 = Brick, Portal = -1
 # Player
-0	20.0	0	1
+# type	x	y	ani_set_id	start_x	start_y	direction_start
+0	20.0	0	1	20	0	1
 
 
 
@@ -23,9 +24,11 @@ textures\scene\scene1\tilesheet.png	textures\scene\scene1\matrix.dat
 -2	1	159	769	16
 
 # ĐUỐC
-1	90	128	2
+# type	x	y	[ani_set_id	item ani_set_of_item]
+# item = 1 : roi, 2 : tim v.v.
+1	90	128	2	1	9
 1	220	128	2
-1	350	128	2	
+1	350	128	2	1	9
 1	470	128	2
 1	610	128	2
 

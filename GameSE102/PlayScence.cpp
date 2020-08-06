@@ -14,8 +14,15 @@
 #include "Linh.h"
 #include "Bat.h"
 #include "DenCay.h"
+#include <algorithm>
 
 using namespace std;
+
+vector<LPGAMEOBJECT> CPlayScene::objects;
+
+void CPlayScene::removeObject(LPGAMEOBJECT gameObject) {
+	objects.erase(remove(objects.begin(), objects.end(), gameObject), objects.end());
+}
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
@@ -56,8 +63,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	vector<string> tokens = split(line);
 
 	//DebugOut(L"--> %s\n",ToWSTR(line).c_str());
-
-	if (tokens.size() < 3) return; // skip invalid lines - an object set must have at least id, x, y
+	int tokenSize = tokens.size();
+	if (tokenSize < 3) return; // skip invalid lines - an object set must have at least id, x, y
 
 	int object_type = atoi(tokens[0].c_str());
 	float x = atof(tokens[1].c_str());
@@ -72,9 +79,17 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	switch (object_type)
 	{
 	case OBJECT_TYPE_PLAYER: {
-		CPlayer::getInstane()->SetPosition(x, y);
+		CPlayer* player = CPlayer::getInstane();
+		player->SetPosition(x, y);
 		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
-		CPlayer::getInstane()->SetAnimationSet(ani_set);
+		player->SetAnimationSet(ani_set);
+		if (tokenSize == 7) {
+			float startX = atof(tokens[4].c_str());
+			float startY = atof(tokens[5].c_str());
+			float direct = atof(tokens[6].c_str());
+			player->setStart(startX, startY);
+			player->setDirectionStart(direct);
+		}
 		return;
 	}
 	case OBJECT_TYPE_STAIR: {
@@ -102,6 +117,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 	case OBJECT_TYPE_DUOC: {
 		obj = new Duoc();
+		if (tokenSize > 4) {
+			int item = atoi(tokens[4].c_str());
+			int aniSetItem = atoi(tokens[5].c_str());
+			((QuaiVat*)obj)->setItem(item);
+			((QuaiVat*)obj)->setAniSetItem(aniSetItem);
+		}
 		break;
 	}
 

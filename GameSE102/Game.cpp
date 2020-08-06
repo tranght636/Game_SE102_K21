@@ -225,3 +225,10 @@ void CGame::SwitchScene(int scene_id)
 	LPSCENE s = scenes[scene_id];
 	s->Load();
 }
+
+void CGame::loadSceneWhenPlayerDie() {
+	this->SwitchScene(CGame::GetInstance()->getCurrentSceneIndex());
+	CPlayer* player = CPlayer::getInstane();
+	player->SetPosition(player->getStartX(), player->getStartY());
+	player->setDirection(player->getDirectionStart());
+}

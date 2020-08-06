@@ -4,6 +4,7 @@
 #include "Stair.h"
 #include "Duoc.h"
 #include "DenCay.h"
+#include "PlayScence.h"
 
 //unordered_map<int, LPANIMATION> CGameObject::animations;
 
@@ -146,4 +147,9 @@ void CGameObject::RenderBoundingBox(int alpha)
 
 CGameObject::~CGameObject()
 {
+}
+
+void CGameObject::release() {
+	CPlayScene::removeObject(this);
+	delete this;
 }

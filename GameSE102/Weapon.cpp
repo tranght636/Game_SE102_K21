@@ -62,7 +62,6 @@ void Weapon::Render() {
 	else {
 		x = y = -50;
 	}
-	//RenderBoundingBox(150);
 }
 
 void Weapon::GetBoundingBox(float &l, float &t, float &r, float &b)

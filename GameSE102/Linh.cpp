@@ -16,7 +16,6 @@ void Linh::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects) {
 	CPlayer* player = CPlayer::getInstane();
 	if (Collision::checkAABB(this, player->getWeapon())) {
 		this->setY(-50);
-		player->setWeaponLevel(100);
 	}
 
 	/*CGameObject::Update(dt);
