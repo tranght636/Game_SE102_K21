@@ -10,7 +10,8 @@ textures\scene\scene3_1\tilesheet.png	textures\scene\scene3_1\matrix.dat
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Player , 1 = Brick, Portal = 50
 # Player
-0	736	110	1
+# type	x	y	ani_set_id	start_x	start_y	direction_start
+0	736	110	1	736	110	-1
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
@@ -32,3 +33,26 @@ textures\scene\scene3_1\tilesheet.png	textures\scene\scene3_1\matrix.dat
 # STAIR
 #type	l	t	w	h	isTop isRightStair
 -3	144	66	14	16	0	0
+
+# cai den
+6	728	115	8
+6	664	130	8
+6	600	130	8
+6	535	130	8
+6	470	130	8
+6	415	130	8
+6	345	130	8
+6	287	130	8
+6	220	130	8
+6	95	115	8
+6	156	50	8
+
+# con ruoi fly
+7	672	128	12
+
+# con coc toad
+8	426	97	10
+8	300	97	10
+8	170	64	10
+# bo xuong Skeleton
+9	46	85	11

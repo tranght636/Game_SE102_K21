@@ -10,7 +10,8 @@ textures\scene\scene2_2\tilesheet.png	textures\scene\scene2_2\matrix.dat
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Player , 1 = Brick, Portal = 50
 # Player
-0	385	139	1
+# type	x	y	ani_set_id	start_x	start_y	direction_start
+0	385	139	1	463	63	-1
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
@@ -39,7 +40,7 @@ textures\scene\scene2_2\tilesheet.png	textures\scene\scene2_2\matrix.dat
 -3	465	80	16	16	1	1
 
 # nguoi linh
-4	327	40	6
-4	128	32	6
+4	330	40	6	321	334	334
+4	130	30	6	128	145	145
 # con doi
 5	298	13	7

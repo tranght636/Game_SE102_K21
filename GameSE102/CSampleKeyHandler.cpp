@@ -13,17 +13,23 @@ void CSampleKeyHandler::update() {
 void CSampleKeyHandler::OnKeyDown(int KeyCode)
 {
 	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	
+	CPlayer* player = CPlayer::getInstane();
 	switch (KeyCode)
 	{
 	case DIK_X:
 	case DIK_SPACE:
-		if (CPlayer::getInstane()->getStateCommon() != PLAYER_STATE_ON_STAIR) {
-			CPlayer::getInstane()->SetState(PLAYER_STATE_JUMP);
+		if (player->getStateCommon() != PLAYER_STATE_ON_STAIR) {
+			player->SetState(PLAYER_STATE_JUMP);
 		}
 		break;
 	case DIK_Z:
-		CPlayer::getInstane()->SetState(PLAYER_STATE_DUNG_DANH);
+		if (player->getStateCommon() == PLAYER_STATE_NOMAL) {
+			player->SetState(PLAYER_STATE_DUNG_DANH);
+		}
+		else if (player->getStateCommon() == PLAYER_STATE_ON_STAIR) {
+			player->SetState(PLAYER_STATE_THANG_DANH);
+		}
+			
 		break;
 	}
 }

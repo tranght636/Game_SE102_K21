@@ -11,13 +11,15 @@ class CPlayScene : public CScene
 protected:
 	CPlayer* player;					// A play scene has to have player, right? 
 
-	vector<LPGAMEOBJECT> objects;
+	
 
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_TILEMAP(string line);
 	void _ParseSection_CAMERA(string line);
 
 public:
+	static vector<LPGAMEOBJECT> objects;
+	static void removeObject(LPGAMEOBJECT gameObject);
 	CPlayScene(int id, LPCWSTR filePath);
 
 	virtual void Load();

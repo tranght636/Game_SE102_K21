@@ -21,6 +21,7 @@
 #define PLAYER_STATE_ON_STAIR	700
 #define PLAYER_STATE_DUNG_DANH	1
 #define PLAYER_STATE_DOI_NGUOC	2
+#define PLAYER_STATE_THANG_DANH	3
 
 #define PLAYER_ANI_IDLE		0
 #define PLAYER_ANI_WALKING	1
@@ -32,6 +33,9 @@
 #define PLAYER_ANI_SIT	7
 #define PLAYER_ANI_DUNG_DANH 8
 #define PLAYER_ANI_DOI_NGUOC 10
+#define PLAYER_ANI_XUONG_THANG_DANH	11
+#define PLAYER_ANI_LEN_THANG_DANH	12
+
 
 #define PLAYER_NO_PREPARE_STAIR 0
 #define PLAYER_PREPARE_STAIR_UP 1
@@ -41,8 +45,15 @@
 #define PLAYER_ON_STAIR_LEFT -1
 #define PLAYER_ON_STAIR_RIGHT 1
 
-#define WEAPON_ROI_LEVEL1 101
-#define WEAPON_ROI_LEVEL2 100
+//#define WEAPON_ROI_LEVEL1 0
+//#define WEAPON_ROI_LEVEL2 1
+
+enum WeaponLevel {
+	WEAPON_ROI_LEVEL1 = 1,
+	WEAPON_ROI_LEVEL2 = 2,
+	WEAPON_ROI_LEVEL3 = 3,
+	LEVEL_FINAL
+};
 
 class CPlayer : public CGameObject
 {
@@ -58,6 +69,7 @@ class CPlayer : public CGameObject
 	bool isDoiNguoc;
 	float destX;
 	float destY;
+	int directionStart;
 
 	//Weapon* weapon;
 
@@ -98,7 +110,10 @@ public:
 	void addWeapon(int id, Weapon* w) { weapons[id] = w; }
 
 	void setWeaponLevel(int level) { this->levelWeapon = level; }
-	
+	void increaseWeaponLevel();
+
+	void setDirectionStart(int direction) { this->directionStart = direction; }
+	int getDirectionStart() { return this->directionStart; }
 	CPlayer();
 	~CPlayer();
 };

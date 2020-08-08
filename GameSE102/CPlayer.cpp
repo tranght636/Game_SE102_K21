@@ -2,8 +2,10 @@
 #include "Portal.h"
 #include "CSampleKeyHandler.h"
 #include "QuaiVat.h"
+#include "RoiItem.h"
 
 bool isSit = false;
+bool isDown = false;
 
 CPlayer* CPlayer::instance = NULL;
 CPlayer* CPlayer::getInstane() {
@@ -25,9 +27,28 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			switch (stateOnStair)
 			{
 			case PLAYER_STATE_STAND_STAIR:
-				
-				if (CSampleKeyHandler::isUpDown) {
+				if (state == PLAYER_STATE_THANG_DANH) {
+					if (isDown) {
+						ani = PLAYER_ANI_XUONG_THANG_DANH;
+						if (getIsLastAni()) {
+							state = PLAYER_STATE_IDLE;
+							ani = PLAYER_ANI_STAND_STAIR_DOWN;
+						}
+					}
+					else {
+						ani = PLAYER_ANI_LEN_THANG_DANH;
+						if (getIsLastAni()) {
+							state = PLAYER_STATE_IDLE;
+							ani = PLAYER_ANI_STAND_STAIR_UP;
+							
+						}
+					}
+					isLastAni = false;
 					
+					
+				}
+				else if (CSampleKeyHandler::isUpDown) {
+					isDown = false;
 					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
 						destX = getX() + DXY_STAIR;
 						vx = PLAYER_ON_STAIR_SPEED;
@@ -45,7 +66,7 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					stateOnStair = PLAYER_STATE_WALKING_STAIR_UP;
 				}
 				else if (CSampleKeyHandler::isDownDown) {
-					
+					isDown = true;
 					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
 						destX = getX() - DXY_STAIR;
 						vx = -PLAYER_ON_STAIR_SPEED;
@@ -166,6 +187,9 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					vy = 0;
 					y = 0;
 				}
+				else if (vy > 0 && y > SCREEN_HEIGHT) {
+					CGame::GetInstance()->loadSceneWhenPlayerDie();
+				}
 				else {
 					y += dy;
 				}
@@ -222,12 +246,19 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							vx = 0.2;
 							direction = -1;
 						}
-						
+						else if (e->ny < 0) {
+							vx = direction > 0 ? -0.2 : 0.2;
+						}
 						vy = -0.2;
 						if (e->ny > 0) {
 							vy = 0.05;
 						}
 						isDoiNguoc = true;
+					}
+					else if (dynamic_cast<RoiItem*>(e->obj)) {
+						RoiItem* roiItem = dynamic_cast<RoiItem*>(e->obj);
+						roiItem->release();
+						this->increaseWeaponLevel();
 					}
 					else if (dynamic_cast<CPortal*>(e->obj))
 					{
@@ -278,18 +309,19 @@ void CPlayer::Render()
 		if (isDoiNguoc) {
 			ani = PLAYER_ANI_DOI_NGUOC;
 		}
-		else if (isOnGround) {
-			if (state == PLAYER_STATE_DUNG_DANH) {
-				if (isLastAni) {
-					SetState(PLAYER_STATE_IDLE);
-					ani = PLAYER_ANI_IDLE;
-				}
-				else {
-					ani = PLAYER_ANI_DUNG_DANH;
-				}
-				
+		else if (state == PLAYER_STATE_DUNG_DANH) { 
+			if (isLastAni) {// danh xong?
+				SetState(PLAYER_STATE_IDLE);
+				ani = PLAYER_ANI_IDLE;
 			}
-			else if (state == PLAYER_STATE_SIT) {
+			else {
+				ani = PLAYER_ANI_DUNG_DANH;
+				vy = 0;
+			}
+
+		}
+		else if (isOnGround) {
+			if (state == PLAYER_STATE_SIT) {
 				ani = PLAYER_ANI_SIT;
 			}
 			else if (vx == 0) {
@@ -373,6 +405,12 @@ void CPlayer::GetBoundingBox(float &left, float &top, float &right, float &botto
 	top = y;
 	right = x + getWidth();	// getAnimation(animationIndex)->getFrame(frameIndex)->getWidth();
 	bottom = y + this->getHeight(); // ||||||||
+}
+
+void CPlayer::increaseWeaponLevel() {
+	if (levelWeapon < LEVEL_FINAL - 1) {
+		levelWeapon++;
+	}
 }
 
 CPlayer::CPlayer() {

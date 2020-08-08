@@ -57,6 +57,7 @@ public:
 	void setStart(float x, float y) { this->start_x = x, this->start_y = y; }
 	void getStart(float &x, float &y) { x = this->start_x, y = this->start_y; }
 	float getStartX() { return this->start_x; }
+	float getStartY() { return this->start_y; }
 
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void setSize(float x, float y, float width, float height) {
@@ -152,5 +153,5 @@ public:
 
 	void SetAnimationSet(LPANIMATION_SET ani_set) { animation_set = ani_set; }
 
-	
+	void release();
 };
