@@ -126,6 +126,15 @@
     <ClCompile Include="RoiItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="Fly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoXuong.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConCoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSampleKeyHandler.h">
@@ -214,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="RoiItem.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Fly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoXuong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConCoc.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

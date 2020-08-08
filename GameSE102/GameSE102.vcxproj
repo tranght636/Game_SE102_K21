@@ -122,15 +122,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="BoXuong.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="ConCoc.cpp" />
     <ClCompile Include="CSampleKeyHandler.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DenCay.cpp" />
     <ClCompile Include="DirectionTexture.cpp" />
     <ClCompile Include="Duoc.cpp" />
+    <ClCompile Include="Fly.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Linh.cpp" />
@@ -152,16 +155,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bat.h" />
+    <ClInclude Include="BoXuong.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CKeyEventHandler.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="ConCoc.h" />
     <ClInclude Include="CSampleKeyHandler.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DenCay.h" />
     <ClInclude Include="DirectionTexture.h" />
     <ClInclude Include="Duoc.h" />
+    <ClInclude Include="Fly.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="GameObject.h" />

@@ -5,6 +5,7 @@
 #include "RoiItem.h"
 
 bool isSit = false;
+bool isDown = false;
 
 CPlayer* CPlayer::instance = NULL;
 CPlayer* CPlayer::getInstane() {
@@ -26,9 +27,28 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			switch (stateOnStair)
 			{
 			case PLAYER_STATE_STAND_STAIR:
-				
-				if (CSampleKeyHandler::isUpDown) {
+				if (state == PLAYER_STATE_THANG_DANH) {
+					if (isDown) {
+						ani = PLAYER_ANI_XUONG_THANG_DANH;
+						if (getIsLastAni()) {
+							state = PLAYER_STATE_IDLE;
+							ani = PLAYER_ANI_STAND_STAIR_DOWN;
+						}
+					}
+					else {
+						ani = PLAYER_ANI_LEN_THANG_DANH;
+						if (getIsLastAni()) {
+							state = PLAYER_STATE_IDLE;
+							ani = PLAYER_ANI_STAND_STAIR_UP;
+							
+						}
+					}
+					isLastAni = false;
 					
+					
+				}
+				else if (CSampleKeyHandler::isUpDown) {
+					isDown = false;
 					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
 						destX = getX() + DXY_STAIR;
 						vx = PLAYER_ON_STAIR_SPEED;
@@ -46,7 +66,7 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					stateOnStair = PLAYER_STATE_WALKING_STAIR_UP;
 				}
 				else if (CSampleKeyHandler::isDownDown) {
-					
+					isDown = true;
 					if (stairDirection == PLAYER_ON_STAIR_RIGHT) {
 						destX = getX() - DXY_STAIR;
 						vx = -PLAYER_ON_STAIR_SPEED;
@@ -289,8 +309,8 @@ void CPlayer::Render()
 		if (isDoiNguoc) {
 			ani = PLAYER_ANI_DOI_NGUOC;
 		}
-		else if (state == PLAYER_STATE_DUNG_DANH) {
-			if (isLastAni) {
+		else if (state == PLAYER_STATE_DUNG_DANH) { 
+			if (isLastAni) {// danh xong?
 				SetState(PLAYER_STATE_IDLE);
 				ani = PLAYER_ANI_IDLE;
 			}

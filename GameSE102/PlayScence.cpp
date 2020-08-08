@@ -14,6 +14,9 @@
 #include "Linh.h"
 #include "Bat.h"
 #include "DenCay.h"
+#include "Fly.h"
+#include "ConCoc.h"
+#include "BoXuong.h"
 #include <algorithm>
 
 using namespace std;
@@ -50,6 +53,9 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define	OBJECT_TYPE_LINH	4
 #define	OBJECT_TYPE_BAT		5
 #define OBJECT_TYPE_DEN_CAY	6
+#define OBJECT_TYPE_FLY	7
+#define OBJECT_TYPE_CONCOC 8
+#define OBJECT_TYPE_BOXUONG 9
 
 
 
@@ -133,6 +139,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	case OBJECT_TYPE_LINH: {
 		obj = new Linh();
+		if (tokenSize == 7) {
+			float x1 = atof(tokens[4].c_str());
+			float x2 = atof(tokens[5].c_str());
+			float x3 = atof(tokens[6].c_str());
+			((Linh*)obj)->setXQuay(x1, x2, x3);
+		}
 		break;
 	}
 	case OBJECT_TYPE_BAT: {
@@ -144,11 +156,26 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
+	case OBJECT_TYPE_FLY: {
+		obj = new Fly();
+		break;
+	}
+	case OBJECT_TYPE_CONCOC: {
+		obj = new ConCoc();
+		break;
+	}
+	case OBJECT_TYPE_BOXUONG: {
+		obj = new BoXuong();
+		break;
+	}
+
 	/*case OBJECT_TYPE_VUKHI: {
 		obj = new Weapon();
 		CPlayer::getInstane()->setWeapon((Weapon* )obj);
 		break;
 	}*/
+
+
 	
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);

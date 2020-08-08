@@ -20,7 +20,8 @@ void Duoc::Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects) {
 	CPlayer* player = CPlayer::getInstane();
 	if (Collision::checkAABB(this, player->getWeapon())) {
 		createItem(x, y);
-		this->setY(-50);
+		this->release();
+		return;
 	}
 }
 
@@ -46,7 +47,7 @@ void Duoc::createItem(float xItem, float yItem) {
 			itemObj = new RoiItem();
 			LPANIMATION_SET ani_set = CAnimationSets::GetInstance()->Get(aniSetItem);
 			itemObj->SetAnimationSet(ani_set);
-			itemObj->SetPosition(x, y);
+			itemObj->SetPosition(xItem, yItem);
 			break;
 		}
 		CPlayScene::objects.push_back(itemObj);

@@ -25,9 +25,11 @@ void Zoombie::Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects) {
 		isMove = true;
 		if (dxToPlayer2 > 0) {
 			vx = ZOOMBIE_VX;
+			direction = -1;
 		}
 		else if (dxToPlayer2 < 0) {
 			vx = -ZOOMBIE_VX;
+			direction = 1;
 		}
 	}
 
@@ -47,7 +49,7 @@ void Zoombie::Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects) {
 
 void Zoombie::Render() {
 	ani = 0;
-	animation_set->at(ani)->Render(x, y);
+	animation_set->at(ani)->Render(x, y,direction);
 }
 
 void Zoombie::GetBoundingBox(float &left, float &top, float &right, float &bottom)

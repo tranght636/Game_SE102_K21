@@ -99,7 +99,7 @@ void CAnimation::Render(float x, float y, int direction)
 			currentFrame++;
 			nextFrame++;
 			lastFrameTime = now;
-			if (this->id == 108 || this->id == 109) {
+			if (this->id == 108 || this->id == 109 || this->id == 111 || this->id == 112) {
 				CPlayer::getInstane()->setIsLastAni(false);
 				if (currentFrame >= frames.size()) {
 					CPlayer::getInstane()->setIsLastAni(true);
